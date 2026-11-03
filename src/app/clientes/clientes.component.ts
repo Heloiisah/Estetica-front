@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,6 +13,8 @@ import { PessoaEnderecoService } from '../services/pessoa-endereco.service';
   styleUrl: './clientes.component.css'
 })
 export class ClientesComponent implements OnInit {
+
+  // Variáveis utilizadas para armazenar e controlar os clientes.
   clientes: any[] = [];
   idBusca = '';
   mensagem = '';
@@ -19,10 +22,12 @@ export class ClientesComponent implements OnInit {
 
   constructor(private pessoaEnderecoService: PessoaEnderecoService) {}
 
+  // Executa quando a página é inicializada.
   ngOnInit(): void {
     this.listarClientes();
   }
 
+  // Busca todos os clientes cadastrados na API.
   listarClientes(): void {
     this.carregando = true;
     this.mensagem = '';
@@ -40,9 +45,11 @@ export class ClientesComponent implements OnInit {
     });
   }
 
+  // Consulta um cliente pelo seu ID.
   consultarPorId(): void {
     const id = Number(this.idBusca);
 
+    // Verifica se o ID é um número inteiro e positivo.
     if (!Number.isInteger(id) || id <= 0) {
       this.mensagem = 'Informe um ID válido.';
       return;
@@ -53,6 +60,7 @@ export class ClientesComponent implements OnInit {
 
     this.pessoaEnderecoService.consultarPessoaPorId(id).subscribe({
       next: cliente => {
+        // Coloca o cliente encontrado dentro de uma lista.
         this.clientes = [cliente];
         this.carregando = false;
         this.mensagem = '';
@@ -60,14 +68,18 @@ export class ClientesComponent implements OnInit {
       error: erro => {
         console.error('Erro ao consultar cliente:', erro);
         this.clientes = [];
+
+        // Verifica se o erro é 404 (cliente não encontrado).
         this.mensagem = erro.status === 404
           ? 'Cliente não encontrado.'
           : 'Não foi possível consultar o cliente.';
+
         this.carregando = false;
       }
     });
   }
 
+  // Limpa o campo de pesquisa e carrega novamente todos os clientes.
   limparBusca(): void {
     this.idBusca = '';
     this.listarClientes();

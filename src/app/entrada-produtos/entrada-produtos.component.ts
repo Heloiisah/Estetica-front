@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,6 +13,8 @@ import { EntradaProduto, EntradaProdutoService } from '../services/entrada-produ
   styleUrl: './entrada-produtos.component.css'
 })
 export class EntradaProdutosComponent implements OnInit {
+
+  // Variáveis para armazenar as entradas e os dados do formulário.
   entradas: EntradaProduto[] = [];
 
   idItem: number | null = null;
@@ -29,10 +32,12 @@ export class EntradaProdutosComponent implements OnInit {
 
   constructor(private entradaProdutoService: EntradaProdutoService) {}
 
+  // Executa quando a página é inicializada.
   ngOnInit(): void {
     this.listarEntradas();
   }
 
+  // Busca todas as entradas de produtos cadastradas na API.
   listarEntradas(): void {
     this.carregando = true;
 
@@ -49,10 +54,12 @@ export class EntradaProdutosComponent implements OnInit {
     });
   }
 
+  // Valida os campos e realiza o cadastro ou a edição de uma entrada.
   salvarEntrada(): void {
     this.mensagem = '';
     this.erro = '';
 
+    // Verifica se todos os campos obrigatórios foram preenchidos.
     if (
       this.idItem === null ||
       !this.dataEntradaProduto ||
@@ -64,6 +71,7 @@ export class EntradaProdutosComponent implements OnInit {
       return;
     }
 
+    // Verifica se os valores são positivos e se a unidade possui até 10 caracteres.
     if (
       this.idItem <= 0 ||
       this.quantidadeEntrada <= 0 ||
@@ -74,6 +82,7 @@ export class EntradaProdutosComponent implements OnInit {
       return;
     }
 
+    // Monta o objeto com os dados que serão enviados para a API.
     const dados: Partial<EntradaProduto> = {
       idItem: this.idItem,
       dataEntradaProduto: this.dataEntradaProduto,
@@ -82,6 +91,7 @@ export class EntradaProdutosComponent implements OnInit {
       valorUnitarioEntrada: this.valorUnitarioEntrada
     };
 
+    // Verifica se existe um ID de edição para decidir entre atualizar ou cadastrar.
     if (this.idEdicao !== null) {
       const id = this.idEdicao;
 
@@ -97,6 +107,7 @@ export class EntradaProdutosComponent implements OnInit {
         }
       });
     } else {
+      // Se não estiver editando, realiza um novo cadastro.
       this.entradaProdutoService.cadastrarEntrada(dados).subscribe({
         next: () => {
           this.mensagem = 'Entrada registrada com sucesso!';
@@ -111,10 +122,12 @@ export class EntradaProdutosComponent implements OnInit {
     }
   }
 
+  // Consulta uma entrada específica utilizando seu ID.
   consultarPorId(): void {
     this.mensagem = '';
     this.erro = '';
 
+    // Verifica se o ID informado é válido.
     if (this.idBusca === null || this.idBusca <= 0) {
       this.erro = 'Informe um ID de entrada válido.';
       return;
@@ -122,6 +135,7 @@ export class EntradaProdutosComponent implements OnInit {
 
     this.entradaProdutoService.consultarEntrada(this.idBusca).subscribe({
       next: (entrada) => {
+        // Coloca a entrada encontrada dentro de uma lista.
         this.entradas = [entrada];
         this.mensagem = 'Entrada encontrada.';
       },
@@ -132,6 +146,7 @@ export class EntradaProdutosComponent implements OnInit {
     });
   }
 
+  // Carrega os dados da entrada selecionada nos campos do formulário.
   editar(entrada: EntradaProduto): void {
     this.idEdicao = entrada.idEntradaProduto;
     this.idItem = entrada.idItem;
@@ -144,6 +159,7 @@ export class EntradaProdutosComponent implements OnInit {
     this.erro = '';
   }
 
+  // Exclui uma entrada após a confirmação do usuário.
   excluir(id: number): void {
     if (!confirm('Deseja realmente excluir esta entrada?')) {
       return;
@@ -164,6 +180,7 @@ export class EntradaProdutosComponent implements OnInit {
     });
   }
 
+  // Limpa todos os campos do formulário e o ID de edição.
   limparFormulario(): void {
     this.idItem = null;
     this.dataEntradaProduto = '';
@@ -173,12 +190,14 @@ export class EntradaProdutosComponent implements OnInit {
     this.idEdicao = null;
   }
 
+  // Cancela a edição e limpa as mensagens da tela.
   cancelarEdicao(): void {
     this.limparFormulario();
     this.mensagem = '';
     this.erro = '';
   }
 
+  // Limpa a pesquisa e volta a exibir todas as entradas.
   voltarLista(): void {
     this.idBusca = null;
     this.mensagem = '';

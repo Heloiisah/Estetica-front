@@ -12,6 +12,8 @@ import { Produto, ProdutoService } from '../services/produto.service';
   styleUrl: './gerenciamento-produtos.component.css'
 })
 export class GerenciamentoProdutosComponent implements OnInit {
+
+  // Armazena os produtos e os dados utilizados no formulário.
   produtos: Produto[] = [];
 
   idCategoria: number | null = null;
@@ -32,15 +34,18 @@ export class GerenciamentoProdutosComponent implements OnInit {
 
   constructor(private produtoService: ProdutoService) {}
 
+  // Executa quando a página é inicializada.
   ngOnInit(): void {
     this.listarProdutos();
   }
 
+  // Busca os produtos cadastrados na API.
   listarProdutos(): void {
     this.carregando = true;
 
     this.produtoService.listarProdutos().subscribe({
       next: (dados) => {
+        // Filtra somente os itens do tipo P (produtos).
         this.produtos = dados.filter(
           produto =>
             String(produto.tipoItem).trim().toUpperCase() === 'P'
@@ -55,10 +60,12 @@ export class GerenciamentoProdutosComponent implements OnInit {
     });
   }
 
+  // Valida os campos e realiza o cadastro ou a edição do produto.
   salvarProduto(): void {
     this.mensagem = '';
     this.erro = '';
 
+    // Verifica se todos os campos obrigatórios foram preenchidos.
     if (
       !this.nomeProduto.trim() ||
       !this.descricaoProduto.trim() ||
@@ -72,11 +79,13 @@ export class GerenciamentoProdutosComponent implements OnInit {
       return;
     }
 
+    // Impede o cadastro de preços negativos.
     if (this.precoItem < 0 || this.precoVenda < 0) {
       this.erro = 'Os preços não podem ser negativos.';
       return;
     }
 
+    // Monta o objeto com os dados que serão enviados para a API.
     const dados: Partial<Produto> = {
       idcategoria: this.idCategoria,
       item: this.nomeProduto.trim(),
@@ -89,6 +98,7 @@ export class GerenciamentoProdutosComponent implements OnInit {
       unidade: this.unidade.trim()
     };
 
+    // Se existir um ID de edição, atualiza o produto.
     if (this.idEdicao !== null) {
       const id = this.idEdicao;
 
@@ -104,6 +114,7 @@ export class GerenciamentoProdutosComponent implements OnInit {
         }
       });
     } else {
+      // Caso contrário, cadastra um novo produto.
       this.produtoService.cadastrarProduto(dados).subscribe({
         next: () => {
           this.mensagem = 'Produto cadastrado com sucesso!';
@@ -118,6 +129,7 @@ export class GerenciamentoProdutosComponent implements OnInit {
     }
   }
 
+  // Consulta um produto pelo ID informado.
   consultarPorId(): void {
     this.mensagem = '';
     this.erro = '';
@@ -129,6 +141,7 @@ export class GerenciamentoProdutosComponent implements OnInit {
 
     this.produtoService.consultarProduto(this.idBusca).subscribe({
       next: (produto) => {
+        // Verifica se o item encontrado realmente é um produto.
         if (String(produto.tipoItem).trim().toUpperCase() !== 'P') {
           this.erro = 'O ID informado não corresponde a um produto.';
           return;
@@ -144,6 +157,7 @@ export class GerenciamentoProdutosComponent implements OnInit {
     });
   }
 
+  // Carrega os dados do produto selecionado nos campos de edição.
   editar(produto: Produto): void {
     this.idEdicao = produto.idItem;
     this.idCategoria = produto.idcategoria;
@@ -159,6 +173,7 @@ export class GerenciamentoProdutosComponent implements OnInit {
     this.erro = '';
   }
 
+  // Exclui um produto após a confirmação do usuário.
   excluir(id: number): void {
     if (!confirm('Deseja realmente excluir este produto?')) {
       return;
@@ -179,11 +194,13 @@ export class GerenciamentoProdutosComponent implements OnInit {
     });
   }
 
+  // Cancela a edição e limpa os campos do formulário.
   cancelarEdicao(): void {
     this.idEdicao = null;
     this.limparFormulario();
   }
 
+  // Restaura os campos do formulário para os valores iniciais.
   limparFormulario(): void {
     this.idCategoria = null;
     this.nomeProduto = '';
@@ -196,6 +213,7 @@ export class GerenciamentoProdutosComponent implements OnInit {
     this.idEdicao = null;
   }
 
+  // Limpa a pesquisa e retorna à listagem completa.
   voltarLista(): void {
     this.idBusca = null;
     this.mensagem = '';

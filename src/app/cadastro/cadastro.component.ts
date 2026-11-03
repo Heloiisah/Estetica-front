@@ -11,7 +11,10 @@ import { PessoaEnderecoService } from '../services/pessoa-endereco.service';
   templateUrl: './cadastro.component.html',
   styleUrl: './cadastro.component.css'
 })
+// Componente responsável pelo cadastro de clientes.
 export class CadastroComponent {
+
+  // Armazena os dados pessoais e de endereço do cliente.
   cliente = {
     nome: '',
     cpf: '',
@@ -28,14 +31,17 @@ export class CadastroComponent {
     uf: ''
   };
 
+  // Controla a mensagem exibida e o ID do cliente cadastrado.
   mensagemCliente = '';
   idPessoaCadastrada: number | null = null;
 
   constructor(private pessoaEnderecoService: PessoaEnderecoService) {}
 
+  // Realiza o cadastro do cliente após validar os dados informados.
   cadastrarCliente(): void {
     this.mensagemCliente = '';
 
+    // Verifica se os campos obrigatórios foram preenchidos.
     const camposObrigatorios = [
       this.cliente.nome,
       this.cliente.cpf,
@@ -52,14 +58,17 @@ export class CadastroComponent {
       return;
     }
 
+    // Remove caracteres especiais do CPF e telefone e converte para número.
     const cpf = Number(this.cliente.cpf.replace(/\D/g, ''));
     const telefone = Number(this.cliente.telefone.replace(/\D/g, ''));
 
+    // Verifica se CPF e telefone possuem valores numéricos válidos.
     if (!Number.isSafeInteger(cpf) || !Number.isSafeInteger(telefone)) {
       this.mensagemCliente = 'Confira o CPF e o telefone informados.';
       return;
     }
 
+    // Organiza os dados que serão enviados para a API.
     const dados = {
       nome: this.cliente.nome.trim(),
       cpf,
@@ -77,13 +86,17 @@ export class CadastroComponent {
       ]
     };
 
+    // Envia os dados para cadastrar o cliente na API.
     this.pessoaEnderecoService.cadastrarPessoa(dados).subscribe({
       next: (resposta) => {
+
+        // Recupera o ID do cliente retornado pela API.
         const id = Number(resposta?.idpessoa ?? resposta?.idPessoa);
 
         this.idPessoaCadastrada =
           Number.isInteger(id) && id > 0 ? id : null;
 
+        // Armazena o ID do cliente no navegador.
         if (this.idPessoaCadastrada !== null) {
           localStorage.setItem(
             'idpessoa',
@@ -91,13 +104,16 @@ export class CadastroComponent {
           );
         }
 
+        // Limpa os campos após o cadastro.
         this.limparCliente();
 
+        // Exibe a mensagem de sucesso.
         this.mensagemCliente = this.idPessoaCadastrada !== null
           ? `Cadastro realizado com sucesso! Código do cliente: ${this.idPessoaCadastrada}`
           : 'Cadastro realizado com sucesso!';
       },
       error: erro => {
+        // Exibe os detalhes caso ocorra algum erro no cadastro.
         console.error('Erro ao cadastrar cliente:', erro);
         console.error('Detalhes retornados pela API:', erro.error);
 
@@ -110,6 +126,7 @@ export class CadastroComponent {
     });
   }
 
+  // Limpa todos os campos do formulário de cadastro.
   limparCliente(): void {
     this.cliente = {
       nome: '',

@@ -1,9 +1,11 @@
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { PedidoService } from '../services/pedido.service';
 
+// Define os dados de cada item que faz parte de um pedido.
 interface ItemPedido {
   idItem: number;
   quantidade: number;
@@ -11,6 +13,7 @@ interface ItemPedido {
   subtotal: number;
 }
 
+// Define a estrutura dos dados de um pedido.
 interface Pedido {
   idPedido: number;
   idPessoa: number;
@@ -30,11 +33,14 @@ interface Pedido {
   styleUrl: './pedidos.component.css'
 })
 export class PedidosComponent implements OnInit {
+
+  // Armazena os pedidos e controla as mensagens da tela.
   pedidos: Pedido[] = [];
   carregando = false;
   mensagem = '';
   erro = '';
 
+  // Lista os status disponíveis para os pedidos.
   statusPermitidos = [
     'Aberto',
     'Em processamento',
@@ -44,10 +50,12 @@ export class PedidosComponent implements OnInit {
 
   constructor(private pedidoService: PedidoService) {}
 
+  // Executa quando a página é inicializada.
   ngOnInit(): void {
     this.listarPedidos();
   }
 
+  // Busca todos os pedidos cadastrados na API.
   listarPedidos(): void {
     this.carregando = true;
     this.erro = '';
@@ -64,19 +72,23 @@ export class PedidosComponent implements OnInit {
     });
   }
 
+  // Atualiza o status de um pedido selecionado.
   atualizarStatus(pedido: Pedido, novoStatus: string): void {
     this.mensagem = '';
     this.erro = '';
 
+    // Verifica se o novo status foi informado e se é diferente do atual.
     if (!novoStatus || novoStatus === pedido.status) {
       return;
     }
 
+    // Envia o ID do pedido e o novo status para a API.
     this.pedidoService.atualizarStatusPedido(
       pedido.idPedido,
       novoStatus
     ).subscribe({
       next: (resposta) => {
+        // Atualiza o status na tela após a confirmação da API.
         pedido.status = resposta.status;
         this.mensagem = `Status do pedido ${pedido.idPedido} atualizado com sucesso!`;
       },

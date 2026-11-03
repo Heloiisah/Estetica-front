@@ -13,6 +13,8 @@ import { ItemServico, ItemServicoService } from '../services/item-servico.servic
   styleUrl: './gerenciamento-servicos.component.css'
 })
 export class GerenciamentoServicosComponent implements OnInit {
+
+  // Armazena os serviços e os dados utilizados no formulário.
   servicos: ItemServico[] = [];
   idCategoria: number | null = 3;
   nomeServico = '';
@@ -27,10 +29,12 @@ export class GerenciamentoServicosComponent implements OnInit {
 
   constructor(private itemServicoService: ItemServicoService) {}
 
+  // Executa quando a página é inicializada.
   ngOnInit(): void {
     this.listarServicos();
   }
 
+  // Busca os serviços cadastrados na API.
   listarServicos(): void {
     this.carregando = true;
     this.erro = '';
@@ -38,6 +42,7 @@ export class GerenciamentoServicosComponent implements OnInit {
 
     this.itemServicoService.listarServicos().subscribe({
       next: dados => {
+        // Filtra somente os itens do tipo S (serviços).
         this.servicos = dados.filter(
           servico => servico.tipoItem?.trim().toUpperCase() === 'S'
         );
@@ -51,10 +56,12 @@ export class GerenciamentoServicosComponent implements OnInit {
     });
   }
 
+  // Valida os campos e realiza o cadastro ou a edição do serviço.
   salvarServico(): void {
     const nome = this.nomeServico.trim();
     const descricao = this.descricaoServico.trim();
 
+    // Verifica se os dados foram preenchidos corretamente.
     if (
       !nome ||
       !descricao ||
@@ -70,6 +77,7 @@ export class GerenciamentoServicosComponent implements OnInit {
       return;
     }
 
+    // Monta o objeto com os dados que serão enviados para a API.
     const dados: Partial<ItemServico> = {
       idCategoria: Number(this.idCategoria),
       item: nome,
@@ -82,8 +90,10 @@ export class GerenciamentoServicosComponent implements OnInit {
     this.erro = '';
     this.mensagem = '';
 
+    // Guarda se a operação atual é uma edição.
     const estavaEditando = this.idEdicao !== null;
 
+    // Função executada quando o cadastro ou a edição dá certo.
     const tratarSucesso = (): void => {
       this.mensagem = estavaEditando
         ? 'Serviço atualizado com sucesso!'
@@ -93,11 +103,13 @@ export class GerenciamentoServicosComponent implements OnInit {
       this.listarServicos();
     };
 
+    // Função responsável por tratar erros ao salvar.
     const tratarErro = (erro: unknown): void => {
       console.error('Erro ao salvar serviço:', erro);
       this.erro = 'Não foi possível salvar o serviço. Confira os dados enviados à API.';
     };
 
+    // Se estiver editando, atualiza; caso contrário, cadastra.
     if (estavaEditando) {
       this.itemServicoService
         .editarServico(this.idEdicao!, dados)
@@ -115,7 +127,10 @@ export class GerenciamentoServicosComponent implements OnInit {
     }
   }
 
+  // Pesquisa um serviço utilizando seu ID.
   consultarPorId(): void {
+
+    // Verifica se o ID informado é um número inteiro positivo.
     if (
       this.idBusca === null ||
       !Number.isInteger(Number(this.idBusca)) ||
@@ -132,6 +147,7 @@ export class GerenciamentoServicosComponent implements OnInit {
 
     this.itemServicoService.consultarServico(Number(this.idBusca)).subscribe({
       next: servico => {
+        // Verifica se o item encontrado é realmente um serviço.
         this.servicos =
           servico.tipoItem?.trim().toUpperCase() === 'S'
             ? [servico]
@@ -146,14 +162,18 @@ export class GerenciamentoServicosComponent implements OnInit {
       error: erro => {
         console.error('Erro ao consultar serviço:', erro);
         this.servicos = [];
+
+        // Verifica se o erro é 404 (serviço não encontrado).
         this.erro = erro.status === 404
           ? 'Serviço não encontrado.'
           : 'Não foi possível consultar o serviço.';
+
         this.carregando = false;
       }
     });
   }
 
+  // Carrega os dados do serviço selecionado nos campos de edição.
   editar(servico: ItemServico): void {
     this.idEdicao = servico.idItem;
     this.idCategoria = servico.idCategoria;
@@ -165,6 +185,7 @@ export class GerenciamentoServicosComponent implements OnInit {
     this.erro = '';
   }
 
+  // Exclui um serviço após a confirmação do usuário.
   excluir(servico: ItemServico): void {
     const confirmar = window.confirm(
       `Deseja excluir o serviço "${servico.item}"?`
@@ -184,6 +205,8 @@ export class GerenciamentoServicosComponent implements OnInit {
       },
       error: erro => {
         console.error('Erro ao excluir serviço:', erro);
+
+        // Verifica se o serviço está vinculado a algum atendimento (erro 409).
         this.erro = erro.status === 409
           ? 'Não é possível excluir este serviço porque ele está vinculado a um atendimento.'
           : 'Não foi possível excluir o serviço.';
@@ -191,6 +214,7 @@ export class GerenciamentoServicosComponent implements OnInit {
     });
   }
 
+  // Cancela a edição e restaura os campos para os valores iniciais.
   cancelarEdicao(): void {
     this.idEdicao = null;
     this.idCategoria = 3;
