@@ -31,7 +31,7 @@ export class ProdutosComponent implements OnInit {
 
   // Armazena o nome utilizado na pesquisa de produtos.
   pesquisa = '';
-  pesquisaId = '';
+  pesquisaId: number | null = null;
 
   // Armazena a categoria selecionada no filtro.
   categoriaSelecionada = '';
@@ -123,8 +123,8 @@ export class ProdutosComponent implements OnInit {
         String(produto.idCategoria ?? produto.idcategoria) === this.categoriaSelecionada;
 
       const idCorresponde =
-        this.pesquisaId === '' ||
-        String(produto.idItem) === this.pesquisaId;
+        this.pesquisaId === null ||
+        Number(produto.idItem) === Number(this.pesquisaId);
 
       // Retorna somente os produtos que atendem aos dois filtros.
       return nomeCorresponde && categoriaCorresponde && idCorresponde;
