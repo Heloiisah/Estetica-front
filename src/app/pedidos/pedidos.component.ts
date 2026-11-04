@@ -63,7 +63,7 @@ export class PedidosComponent implements OnInit {
   // Executa quando a página é inicializada.
   ngOnInit(): void {
     this.listarPedidos();
-    this.http.get<any[]>(`http://${window.location.hostname}:5206/api/Funcionario`).subscribe({
+    this.http.get<any[]>('http://localhost:5206/api/Funcionario').subscribe({
       next: dados => this.funcionarios = dados.filter(f => f.pessoa?.ativoPessoa === 'S'),
       error: () => this.erro = 'Não foi possível carregar os funcionários.'
     });

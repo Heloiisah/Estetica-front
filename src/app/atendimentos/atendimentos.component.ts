@@ -22,7 +22,7 @@ export class AtendimentosComponent implements OnInit {
   quantidade = 1;
   valor = 0;
 
-  private url = `http://${window.location.hostname}:5206/api/Atendimento`;
+  private url = 'http://localhost:5206/api/Atendimento';
 
   constructor(private http: HttpClient) {}
 

@@ -23,7 +23,7 @@ export interface Estoque {
 export class EstoqueService {
 
   // Endereço da API responsável pelo estoque.
-  private apiUrl = `http://${window.location.hostname}:5206/api/Estoque`;
+  private apiUrl = 'http://localhost:5206/api/Estoque';
 
   constructor(private http: HttpClient) {}
 

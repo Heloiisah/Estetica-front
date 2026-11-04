@@ -17,7 +17,7 @@ export interface Categoria {
 export class CategoriaService {
 
   // Endereço da API responsável pelas categorias.
-  private apiUrl = `http://${window.location.hostname}:5206/api/Categorium`;
+  private apiUrl = 'http://localhost:5206/api/Categorium';
 
   constructor(private http: HttpClient) {}
 

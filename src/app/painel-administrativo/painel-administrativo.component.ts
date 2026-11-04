@@ -17,7 +17,7 @@ export class PainelAdministrativoComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    const api = `http://${window.location.hostname}:5206/api/`;
+    const api = 'http://localhost:5206/api/';
     this.http.get<any[]>(api + 'PessoaEndereco').subscribe({next: dados => this.resumo.clientes = dados.length, error: () => this.aviso = 'Alguns dados do painel não puderam ser carregados.'});
     this.http.get<any[]>(api + 'ProdutoItem').subscribe({next: dados => this.resumo.produtos = dados.length, error: () => this.aviso = 'Alguns dados do painel não puderam ser carregados.'});
     this.http.get<any[]>(api + 'ItemServico').subscribe({next: dados => this.resumo.servicos = dados.length, error: () => this.aviso = 'Alguns dados do painel não puderam ser carregados.'});

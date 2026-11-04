@@ -28,7 +28,7 @@ export class FuncionariosComponent implements OnInit {
   cargo = '';
   admissao = '';
 
-  private url = `http://${window.location.hostname}:5206/api/Funcionario`;
+  private url = 'http://localhost:5206/api/Funcionario';
 
   constructor(private http: HttpClient) {}
 
