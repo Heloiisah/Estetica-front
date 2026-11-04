@@ -1,48 +1,71 @@
-
 <header class="cabecalho">
-    <a class="logo" routerLink="/inicio"><span class="logo-marca">M</span><span><strong>Minha Loja</strong><small>Estética &amp; Bem-Estar</small></span></a>
-  
-    <nav aria-label="Navegação principal">
-      <a routerLink="/inicio">Início</a>
-      <a routerLink="/produtos">Produtos</a>
-      <a routerLink="/item-servico">Serviços</a>
-      <a routerLink="/cadastro">Cadastro</a>
-      <a routerLink="/carrinho">Carrinho</a>
-      <a routerLink="/painel-administrativo">Administração</a>
+  <a class="logo" routerLink="/inicio">
+    <span class="logo-marca">M</span>
+    <span>
+      <strong>Minha Loja</strong>
+      <small>Estética &amp; Bem-Estar</small>
+    </span>
+  </a>
+
+  <nav aria-label="Navegação principal">
+    <a routerLink="/inicio">Início</a>
+    <a routerLink="/produtos">Produtos</a>
+    <a routerLink="/item-servico">Serviços</a>
+    <a routerLink="/cadastro">Cadastro</a>
+    <a routerLink="/carrinho">Carrinho</a>
+    <a routerLink="/painel-administrativo">Administração</a>
   </nav>
-  </header>
-  
-  <main class="catalogo">
-    <h2>Nossos serviços</h2>
-    <p>Conheça nossos serviços de estética e bem-estar.</p>
-  
-    @if (mensagemErro) {
-      <p class="erro">{{ mensagemErro }}</p>
-    }
-  
-    <div class="produtos">
-      @for (servico of servicos(); track servico.idItem) {
-        <article class="produto">
-          <h3>{{ servico.item }}</h3>
-          <p>{{ servico.descricaoItem }}</p>
-  
-          <p class="preco">
-            R$ {{ obterPreco(servico).toFixed(2) }}
-          </p>
-  
-          <button class="botao-agendar" (click)="agendar(servico)">
-            Agendar
-          </button>
-        </article>
-      } @empty {
-        @if (!mensagemErro) {
-          <p>Nenhum serviço disponível no momento.</p>
-        }
+</header>
+
+<main class="catalogo">
+  <h2>Nossos serviços</h2>
+  <p>Conheça nossos serviços de estética e bem-estar.</p>
+
+  <div class="filtros">
+    <input
+      type="text"
+      placeholder="Pesquisar serviço pelo nome..."
+      [(ngModel)]="pesquisa"
+    >
+
+    <select [(ngModel)]="categoriaSelecionada">
+      <option value="">Todas as categorias</option>
+
+      @for (categoria of categorias; track categoria.idcategoria) {
+        <option [value]="categoria.idcategoria">
+          {{ categoria.categoria }}
+        </option>
       }
-    </div>
-  </main>
-  
-  <footer>
-    <p>Minha Loja | Estética & Bem-Estar</p>
-  </footer>
-  
+    </select>
+  </div>
+
+  @if (mensagemErro) {
+    <p class="erro">{{ mensagemErro }}</p>
+  }
+
+  <div class="produtos">
+    @for (servico of servicosFiltrados(); track servico.idItem) {
+      <article class="produto">
+        <h3>{{ servico.item }}</h3>
+
+        <p>{{ servico.descricaoItem }}</p>
+
+        <p class="preco">
+          R$ {{ obterPreco(servico).toFixed(2) }}
+        </p>
+
+        <button class="botao-agendar" (click)="agendar(servico)">
+          Agendar
+        </button>
+      </article>
+    } @empty {
+      @if (!mensagemErro) {
+        <p>Nenhum serviço encontrado.</p>
+      }
+    }
+  </div>
+</main>
+
+<footer>
+  <p>Minha Loja | Estética &amp; Bem-Estar</p>
+</footer>

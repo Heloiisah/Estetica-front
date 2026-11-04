@@ -13,38 +13,56 @@
   </header>
   
   <main class="catalogo">
-    <h2>Nossos produtos</h2>
-    <p>Confira nossos produtos de beleza e bem-estar.</p>
-  
-    @if (mensagemErro) {
-      <p class="erro">{{ mensagemErro }}</p>
-    }
-  
-    <div class="produtos">
-      @for (produto of produtos(); track produto.idItem) {
-        <article class="produto">
-          <h3>{{ produto.item }}</h3>
-          <p>{{ produto.descricaoItem }}</p>
-  
-          <p class="preco">
-            R$ {{ obterPreco(produto).toFixed(2) }}
-          </p>
-  
-          <button
-            class="botao-comprar"
-            (click)="adicionarAoCarrinho(produto)">
-            Adicionar ao carrinho
-          </button>
-        </article>
-      } @empty {
-        @if (!mensagemErro) {
-          <p>Nenhum produto disponível no momento.</p>
-        }
+  <h2>Nossos produtos</h2>
+  <p>Confira nossos produtos de beleza e bem-estar.</p>
+
+  <!-- PESQUISA POR NOME -->
+  <input
+    type="text"
+    placeholder="Pesquisar produto pelo nome..."
+    [(ngModel)]="pesquisa"
+  >
+
+  <!-- FILTRO POR CATEGORIA -->
+<select [(ngModel)]="categoriaSelecionada">
+  <option value="">Todas as categorias</option>
+
+  @for (categoria of categorias; track categoria.idcategoria) {
+    <option [value]="categoria.idcategoria">
+      {{ categoria.categoria }}
+    </option>
+  }
+</select>
+
+  @if (mensagemErro) {
+    <p class="erro">{{ mensagemErro }}</p>
+  }
+
+  <div class="produtos">
+    @for (produto of produtosFiltrados(); track produto.idItem) {
+      <article class="produto">
+        <h3>{{ produto.item }}</h3>
+        <p>{{ produto.descricaoItem }}</p>
+
+        <p class="preco">
+          R$ {{ obterPreco(produto).toFixed(2) }}
+        </p>
+
+        <button
+          class="botao-comprar"
+          (click)="adicionarAoCarrinho(produto)">
+          Adicionar ao carrinho
+        </button>
+      </article>
+    } @empty {
+      @if (!mensagemErro) {
+        <p>Nenhum produto encontrado.</p>
       }
-    </div>
-  </main>
-  
-  <footer>
-    <p>Minha Loja | Estética & Bem-Estar</p>
-  </footer>
-  
+    }
+  </div>
+</main>
+
+<footer>
+  <p>Minha Loja | Estética & Bem-Estar</p>
+</footer>
+

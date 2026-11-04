@@ -1,193 +1,236 @@
-
 :host {
-    display: block;
-    min-height: 100vh;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    color: #322739;
-    background: #faf8fd;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
-  
+  display: block;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #322739;
+  background: #faf8fd;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  padding: 16px 7%;
+  background: #59337c;
+  border-bottom: 4px solid #cbb2df;
+}
+
+.logo h1 {
+  margin: 0;
+  color: #fff;
+  font-family: Georgia, serif;
+  font-size: 27px;
+  font-weight: normal;
+}
+
+.logo p {
+  margin: 4px 0 0;
+  color: #eee7f7;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+nav a {
+  color: #fff;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #dfc9ef;
+}
+
+.catalogo {
+  min-height: 65vh;
+  padding: 45px 7%;
+  background: #eee7f7;
+  text-align: center;
+}
+
+.catalogo h2 {
+  margin: 0 0 12px;
+  color: #493455;
+  font-family: Georgia, serif;
+  font-size: 32px;
+  font-weight: normal;
+}
+
+.catalogo > p {
+  color: #665370;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* PESQUISA E CATEGORIAS */
+.catalogo input,
+.catalogo select {
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid #cbb2df;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #493455;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 14px;
+  outline: none;
+  vertical-align: middle;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.catalogo input {
+  width: 290px;
+  max-width: 100%;
+  margin-right: 12px;
+}
+
+.catalogo select {
+  width: 220px;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+.catalogo input:focus,
+.catalogo select:focus {
+  border-color: #71439a;
+  box-shadow: 0 0 0 3px #cbb2df55;
+}
+
+.catalogo input::placeholder {
+  color: #a292ad;
+}
+
+.produtos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 25px;
+  text-align: left;
+}
+
+.produto {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid #dfd2ea;
+  border-radius: 5px;
+  background: #ffffff;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.produto:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px #59337c18;
+}
+
+.produto h3 {
+  color: #493455;
+  font-family: Georgia, serif;
+  font-size: 19px;
+  font-weight: normal;
+}
+
+.produto p {
+  color: #665370;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.produto .preco {
+  margin-top: auto;
+  padding-top: 12px;
+  color: #59337c;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.botao-comprar {
+  margin-top: 15px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  background: #59337c;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.botao-comprar:hover {
+  background: #71439a;
+}
+
+.erro {
+  color: #a12626;
+}
+
+footer {
+  padding: 25px 7%;
+  background: #59337c;
+  color: #fff;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
   .cabecalho {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 25px;
-    padding: 16px 7%;
-    background: #59337c;
-    border-bottom: 4px solid #cbb2df;
-  }
-  
-  .logo h1 {
-    margin: 0;
-    color: #fff;
-    font-family: Georgia, serif;
-    font-size: 27px;
-    font-weight: normal;
-  }
-  
-  .logo p {
-    margin: 4px 0 0;
-    color: #eee7f7;
-    font-size: 11px;
-    letter-spacing: 1.5px;
-  }
-  
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  nav a {
-    color: #fff;
-    font-size: 13px;
-    text-decoration: none;
-  }
-  
-  nav a:hover {
-    color: #dfc9ef;
-  }
-  
-  .catalogo {
-    min-height: 65vh;
-    padding: 45px 7%;
-    background: #eee7f7;
-    text-align: center;
-  }
-  
-  .catalogo h2 {
-    margin: 0 0 12px;
-    color: #493455;
-    font-family: Georgia, serif;
-    font-size: 32px;
-    font-weight: normal;
-  }
-  
-  .catalogo > p {
-    color: #665370;
-    font-size: 14px;
-    line-height: 1.7;
-  }
-  
-  .produtos {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
-    margin-top: 25px;
-    text-align: left;
-  }
-  
-  .produto {
-    display: flex;
     flex-direction: column;
+    gap: 16px;
+  }
+
+  nav {
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .produtos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .cabecalho {
     padding: 20px;
-    border: 1px solid #dfd2ea;
-    border-radius: 5px;
-    background: #ffffff;
-    transition: box-shadow 0.3s, transform 0.3s;
   }
-  
-  .produto:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 18px #59337c18;
+
+  nav {
+    gap: 12px;
   }
-  
-  .produto h3 {
-    color: #493455;
-    font-family: Georgia, serif;
-    font-size: 19px;
-    font-weight: normal;
+
+  nav a {
+    font-size: 12px;
   }
-  
-  .produto p {
-    color: #665370;
-    font-size: 13px;
-    line-height: 1.6;
+
+  .catalogo {
+    padding: 35px 5%;
   }
-  
-  .produto .preco {
-    margin-top: auto;
-    padding-top: 12px;
-    color: #59337c;
-    font-size: 18px;
-    font-weight: bold;
+
+  .catalogo h2 {
+    font-size: 28px;
   }
-  
-  .botao-comprar {
-    margin-top: 15px;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    background: #59337c;
-    color: #fff;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background 0.3s;
+
+  .produtos {
+    grid-template-columns: 1fr;
   }
-  
-  .botao-comprar:hover {
-    background: #71439a;
+
+  .catalogo input,
+  .catalogo select {
+    display: block;
+    width: 100%;
+    margin: 10px auto;
   }
-  
-  .erro {
-    color: #a12626;
-  }
-  
-  footer {
-    padding: 25px 7%;
-    background: #59337c;
-    color: #fff;
-    text-align: center;
-  }
-  
-  footer p {
-    margin: 0;
-    font-size: 13px;
-  }
-  
-  @media (max-width: 900px) {
-    .cabecalho {
-      flex-direction: column;
-      gap: 16px;
-    }
-  
-    nav {
-      justify-content: center;
-      gap: 15px;
-    }
-  
-    .produtos {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  
-  @media (max-width: 600px) {
-    .cabecalho {
-      padding: 20px;
-    }
-  
-    nav {
-      gap: 12px;
-    }
-  
-    nav a {
-      font-size: 12px;
-    }
-  
-    .catalogo {
-      padding: 35px 5%;
-    }
-  
-    .catalogo h2 {
-      font-size: 28px;
-    }
-  
-    .produtos {
-      grid-template-columns: 1fr;
-    }
-  }
-  
+}
