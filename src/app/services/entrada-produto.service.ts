@@ -21,7 +21,7 @@ export interface EntradaProduto {
 export class EntradaProdutoService {
 
   // Endereço da API responsável pelas entradas de produtos.
-  private apiUrl = 'http://localhost:5206/api/EntradaProduto';
+  private apiUrl = `http://${window.location.hostname}:5206/api/EntradaProduto`;
 
   constructor(private http: HttpClient) {}
 
