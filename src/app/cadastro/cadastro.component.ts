@@ -143,6 +143,9 @@ export class CadastroComponent {
       // Envia o CPF convertido para número.
       cpf,
 
+      // Mantém os 11 dígitos para validar CPF iniciado em zero.
+      cpfTexto: this.cliente.cpf.replace(/\D/g, ''),
+
       // Envia a data de nascimento informada no formulário.
       dataNascimento: this.cliente.dataNascimento,
 
