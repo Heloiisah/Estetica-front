@@ -173,23 +173,23 @@ export class GerenciamentoProdutosComponent implements OnInit {
     this.erro = '';
   }
 
-  // Exclui um produto após a confirmação do usuário.
-  excluir(id: number): void {
-    if (!confirm('Deseja realmente excluir este produto?')) {
+  // Desativa um produto após a confirmação do usuário.
+  desativar(id: number): void {
+    if (!confirm('Deseja realmente desativar este produto?')) {
       return;
     }
 
     this.mensagem = '';
     this.erro = '';
 
-    this.produtoService.excluirProduto(id).subscribe({
+    this.produtoService.desativarProduto(id).subscribe({
       next: () => {
-        this.mensagem = 'Produto excluído com sucesso!';
+        this.mensagem = 'Produto desativado com sucesso!';
         this.listarProdutos();
       },
       error: (erro: unknown) => {
         console.error(erro);
-        this.erro = 'Não foi possível excluir. O produto pode estar vinculado a entradas de estoque ou atendimentos.';
+        this.erro = 'Não foi possível desativar o produto.';
       }
     });
   }

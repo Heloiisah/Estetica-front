@@ -16,7 +16,7 @@ export class PessoaEnderecoService {
 
   // Envia os dados para cadastrar uma nova pessoa e seu endereço.
   cadastrarPessoa(dados: any): Observable<any> {
-    return this.http.post(this.apiUrl, dados);
+    return this.http.post(this.apiUrl, dados, { withCredentials: true });
   }
 
   // Busca todas as pessoas cadastradas no sistema.
@@ -27,5 +27,9 @@ export class PessoaEnderecoService {
   // Consulta uma pessoa específica utilizando seu ID.
   consultarPessoaPorId(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  editarPessoa(id: number, dados: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, dados);
   }
 }

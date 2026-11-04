@@ -14,6 +14,7 @@
     <a routerLink="/cadastro">Cadastro</a>
     <a routerLink="/carrinho">Carrinho</a>
     <a routerLink="/painel-administrativo">Administração</a>
+  <a routerLink="/meus-pedidos">Meus pedidos</a>
   </nav>
 </header>
 
@@ -27,6 +28,8 @@
       placeholder="Pesquisar serviço pelo nome..."
       [(ngModel)]="pesquisa"
     >
+
+    <input type="number" min="1" placeholder="Pesquisar pelo ID" [(ngModel)]="pesquisaId">
 
     <select [(ngModel)]="categoriaSelecionada">
       <option value="">Todas as categorias</option>
@@ -53,6 +56,8 @@
         <p class="preco">
           R$ {{ obterPreco(servico).toFixed(2) }}
         </p>
+
+        <p>Disponível para agendamento</p>
 
         <button class="botao-agendar" (click)="agendar(servico)">
           Agendar

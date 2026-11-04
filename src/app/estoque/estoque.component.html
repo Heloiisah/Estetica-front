@@ -11,6 +11,8 @@
   </div>
 
   <p class="erro" *ngIf="erro">{{ erro }}</p>
+  <label>Consultar produto por ID <input type="number" [(ngModel)]="idBusca" min="1"></label>
+  <button type="button" (click)="consultarPorId()">Consultar</button>
 
   <div class="topo">
     <p>Consulte a quantidade disponível de cada produto.</p>
@@ -26,6 +28,7 @@
       <thead>
         <tr>
           <th>ID do produto</th>
+          <th>Produto</th><th>Descrição</th><th>Categoria</th><th>Preço</th><th>Preço de venda</th><th>Unidade</th><th>Situação</th>
           <th>Quantidade em estoque</th>
           <th>Disponibilidade</th>
         </tr>
@@ -34,6 +37,9 @@
       <tbody>
         <tr *ngFor="let estoque of estoques">
           <td>{{ estoque.idItem }}</td>
+          <td>{{ estoque.item }}</td><td>{{ estoque.descricaoItem }}</td><td>{{ estoque.categoria }}</td>
+          <td>{{ estoque.preco | currency:'BRL' }}</td><td>{{ estoque.precoVenda | currency:'BRL' }}</td>
+          <td>{{ estoque.unidade }}</td><td>{{ estoque.ativoProdutoServico === 'S' ? 'Ativo' : 'Inativo' }}</td>
           <td>{{ estoque.quantidadeEstoque }}</td>
           <td>
             {{ estoque.quantidadeEstoque > 0 ? 'Disponível' : 'Sem estoque' }}
@@ -41,7 +47,7 @@
         </tr>
 
         <tr *ngIf="estoques.length === 0 && !erro && !carregando">
-          <td colspan="3">Nenhum estoque cadastrado.</td>
+          <td colspan="11">Nenhum estoque cadastrado.</td>
         </tr>
       </tbody>
     </table>

@@ -16,17 +16,30 @@ export class PedidoService {
 
   // Envia os dados para criar um novo pedido.
   criarPedido(pedido: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, pedido);
+    return this.http.post<any>(this.apiUrl, pedido, { withCredentials: true });
+  }
+
+  identificarCliente(cpf: number, email: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/identificar`, { cpf, email }, { withCredentials: true });
   }
 
   // Busca todos os pedidos cadastrados no sistema.
-  listarTodosPedidos(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  listarTodosPedidos(status = ''): Observable<any[]> {
+    const filtro = status ? `?status=${encodeURIComponent(status)}` : '';
+    return this.http.get<any[]>(this.apiUrl + filtro);
+  }
+
+  consultarPedido(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  atribuirFuncionario(idPedido: number, idPedidoItem: number, idFuncionario: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${idPedido}/funcionario`, { idPedidoItem, idFuncionario });
   }
 
   // Busca os pedidos realizados por um cliente específico.
   listarPedidosPorCliente(idpessoa: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/cliente/${idpessoa}`);
+    return this.http.get<any[]>(`${this.apiUrl}/cliente/${idpessoa}`, { withCredentials: true });
   }
 
   // Atualiza o status de um pedido pelo seu ID.

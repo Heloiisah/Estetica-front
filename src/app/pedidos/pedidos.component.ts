@@ -4,10 +4,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { PedidoService } from '../services/pedido.service';
+import { HttpClient } from '@angular/common/http';
 
 // Define os dados de cada item que faz parte de um pedido.
 interface ItemPedido {
+  idPedidoItem: number;
   idItem: number;
+  item?: string;
+  idFuncionario?: number;
+  funcionario?: string;
+  cargo?: string;
   quantidade: number;
   valorUnitario: number;
   subtotal: number;
@@ -17,6 +23,7 @@ interface ItemPedido {
 interface Pedido {
   idPedido: number;
   idPessoa: number;
+  cliente?: string;
   dataPedido: string;
   status: string;
   formaPagamento: string;
@@ -36,7 +43,10 @@ export class PedidosComponent implements OnInit {
 
   // Armazena os pedidos e controla as mensagens da tela.
   pedidos: Pedido[] = [];
+  funcionarios: any[] = [];
   carregando = false;
+  busca = 0;
+  statusFiltro = '';
   mensagem = '';
   erro = '';
 
@@ -48,11 +58,29 @@ export class PedidosComponent implements OnInit {
     'Cancelado'
   ];
 
-  constructor(private pedidoService: PedidoService) {}
+  constructor(private pedidoService: PedidoService, private http: HttpClient) {}
 
   // Executa quando a página é inicializada.
   ngOnInit(): void {
     this.listarPedidos();
+    this.http.get<any[]>('http://localhost:5206/api/Funcionario').subscribe({
+      next: dados => this.funcionarios = dados.filter(f => f.pessoa?.ativoPessoa === 'S'),
+      error: () => this.erro = 'Não foi possível carregar os funcionários.'
+    });
+  }
+
+  atribuirFuncionario(pedido: Pedido, item: ItemPedido, idFuncionario: number): void {
+    if (!idFuncionario) return;
+    this.pedidoService.atribuirFuncionario(pedido.idPedido, item.idPedidoItem, Number(idFuncionario)).subscribe({
+      next: () => {
+        const funcionario = this.funcionarios.find(f => f.idPessoa === Number(idFuncionario));
+        item.idFuncionario = Number(idFuncionario);
+        item.funcionario = funcionario?.pessoa?.nome;
+        item.cargo = funcionario?.cargo;
+        this.mensagem = 'Funcionário atribuído ao pedido.';
+      },
+      error: () => this.erro = 'Não foi possível atribuir o funcionário.'
+    });
   }
 
   // Busca todos os pedidos cadastrados na API.
@@ -60,7 +88,7 @@ export class PedidosComponent implements OnInit {
     this.carregando = true;
     this.erro = '';
 
-    this.pedidoService.listarTodosPedidos().subscribe({
+    this.pedidoService.listarTodosPedidos(this.statusFiltro).subscribe({
       next: (dados) => {
         this.pedidos = dados;
         this.carregando = false;
@@ -69,6 +97,14 @@ export class PedidosComponent implements OnInit {
         this.erro = 'Não foi possível carregar os pedidos.';
         this.carregando = false;
       }
+    });
+  }
+
+  consultarPorId(): void {
+    if (this.busca < 1) { this.erro = 'Informe um ID válido.'; return; }
+    this.pedidoService.consultarPedido(this.busca).subscribe({
+      next: pedido => { this.pedidos = [pedido]; this.erro = ''; },
+      error: () => this.erro = 'Pedido não encontrado.'
     });
   }
 

@@ -19,6 +19,14 @@
     </div>
   </div>
 
+  <div class="filtros-pedidos">
+    <label>Pedido por ID <input type="number" [(ngModel)]="busca" min="1"></label>
+    <button type="button" (click)="consultarPorId()">Consultar</button>
+    <label>Situação <select [(ngModel)]="statusFiltro" (ngModelChange)="listarPedidos()">
+      <option value="">Todos</option>
+      <option *ngFor="let status of statusPermitidos" [value]="status">{{ status }}</option>
+    </select></label>
+  </div>
   <p class="mensagem" *ngIf="mensagem">{{ mensagem }}</p>
   <p class="erro" *ngIf="erro">{{ erro }}</p>
   <p class="carregando" *ngIf="carregando">Carregando pedidos...</p>
@@ -40,7 +48,7 @@
       <tbody>
         <tr *ngFor="let pedido of pedidos">
           <td>#{{ pedido.idPedido }}</td>
-          <td>{{ pedido.idPessoa }}</td>
+          <td>#{{ pedido.idPessoa }} · {{ pedido.cliente }}</td>
           <td>{{ pedido.dataPedido | date:'dd/MM/yyyy HH:mm' }}</td>
           <td>{{ pedido.formaPagamento }}</td>
           <td>{{ pedido.total | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
@@ -62,8 +70,17 @@
 
               <div class="detalhes-itens">
                 <div *ngFor="let item of pedido.itens">
-                  <p>Item: {{ item.idItem }}</p>
+                  <p>Item: {{ item.item || item.idItem }}</p>
                   <p>Quantidade: {{ item.quantidade }}</p>
+                  <p>Valor unitário: {{ item.valorUnitario | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+                  <p>Funcionário: {{ item.funcionario || 'Não atribuído' }} <span *ngIf="item.cargo">({{ item.cargo }})</span></p>
+                  <label *ngIf="pedido.status !== 'Concluído' && pedido.status !== 'Cancelado'">
+                    Atribuir funcionário
+                    <select [ngModel]="item.idFuncionario" (ngModelChange)="atribuirFuncionario(pedido, item, $event)">
+                      <option [ngValue]="undefined">Selecione</option>
+                      <option *ngFor="let funcionario of funcionarios" [ngValue]="funcionario.idPessoa">{{ funcionario.pessoa?.nome }} · {{ funcionario.cargo }}</option>
+                    </select>
+                  </label>
                   <p>
                     Subtotal:
                     {{ item.subtotal | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}

@@ -1,0 +1,51 @@
+<main class="pagina">
+  <a routerLink="/painel-administrativo">Voltar ao painel</a>
+  <h1>Funcionários</h1>
+
+  <form (ngSubmit)="salvar()">
+    <h2>{{ editando ? 'Editar funcionário' : 'Novo funcionário' }}</h2>
+    <label>Nome <input name="nome" [(ngModel)]="nome" required></label>
+    <label>CPF <input name="cpf" [(ngModel)]="cpf" required></label>
+    <label>Nascimento <input type="date" name="nascimento" [(ngModel)]="nascimento" required></label>
+    <label>Sexo
+      <select name="sexo" [(ngModel)]="sexo" required>
+        <option value="F">Feminino</option>
+        <option value="M">Masculino</option>
+        <option value="O">Outro</option>
+      </select>
+    </label>
+    <label>E-mail <input type="email" name="email" [(ngModel)]="email" required></label>
+    <label>Telefone <input name="telefone" [(ngModel)]="telefone" required></label>
+    <label>CEP <input name="cep" [(ngModel)]="cep" required></label>
+    <label>Número <input name="numero" [(ngModel)]="numero" required></label>
+    <label>Cargo <input name="cargo" [(ngModel)]="cargo" required></label>
+    <label>Admissão <input type="date" name="admissao" [(ngModel)]="admissao" required></label>
+    <button>{{ editando ? 'Salvar alterações' : 'Cadastrar funcionário' }}</button>
+    <button *ngIf="editando" type="button" (click)="cancelarEdicao()">Cancelar edição</button>
+  </form>
+
+  <p>{{ mensagem }}</p>
+  <label>Consultar por ID <input type="number" [(ngModel)]="busca"></label>
+  <button type="button" (click)="consultar()">Consultar</button>
+  <button type="button" (click)="listar()">Listar todos</button>
+
+  <div class="tabela">
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Nome</th><th>Cargo</th><th>Situação</th><th>Ações</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let funcionario of funcionarios">
+          <td>{{ funcionario.idPessoa }}</td>
+          <td>{{ funcionario.pessoa?.nome }}</td>
+          <td>{{ funcionario.cargo }}</td>
+          <td>{{ funcionario.pessoa?.ativoPessoa }}</td>
+          <td>
+            <button type="button" (click)="editar(funcionario)">Editar</button>
+            <button type="button" (click)="excluir(funcionario)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>

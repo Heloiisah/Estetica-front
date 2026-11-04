@@ -1,13 +1,14 @@
 
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Estoque, EstoqueService } from '../services/estoque.service';
 
 @Component({
   selector: 'app-estoque',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './estoque.component.html',
   styleUrl: './estoque.component.css'
 })
@@ -17,6 +18,15 @@ export class EstoqueComponent implements OnInit {
   // Declara uma lista vazia que armazenará os registros de estoque.
   // Estoque[] indica que a lista poderá conter vários objetos do tipo Estoque.
   estoques: Estoque[] = [];
+  idBusca = 0;
+
+  consultarPorId(): void {
+    if (this.idBusca < 1) { this.erro = 'Informe um ID válido.'; return; }
+    this.estoqueService.consultarEstoque(this.idBusca).subscribe({
+      next: estoque => { this.estoques = [estoque]; this.erro = ''; },
+      error: () => this.erro = 'Produto não encontrado no estoque.'
+    });
+  }
 
   // Declara uma variável para armazenar mensagens de sucesso exibidas na tela.
   // Inicialmente, ela começa vazia.
@@ -98,4 +108,4 @@ export class EstoqueComponent implements OnInit {
 
   } 
 
-} 
+}

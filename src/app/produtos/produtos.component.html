@@ -9,6 +9,7 @@
       <a routerLink="/cadastro">Cadastro</a>
       <a routerLink="/carrinho">Carrinho</a>
       <a routerLink="/painel-administrativo">Administração</a>
+  <a routerLink="/meus-pedidos">Meus pedidos</a>
   </nav>
   </header>
   
@@ -22,6 +23,8 @@
     placeholder="Pesquisar produto pelo nome..."
     [(ngModel)]="pesquisa"
   >
+
+  <input type="number" min="1" placeholder="Pesquisar pelo ID" [(ngModel)]="pesquisaId">
 
   <!-- FILTRO POR CATEGORIA -->
 <select [(ngModel)]="categoriaSelecionada">
@@ -48,8 +51,11 @@
           R$ {{ obterPreco(produto).toFixed(2) }}
         </p>
 
+        <p>Disponível: {{ estoque[produto.idItem] || 0 }}</p>
+
         <button
           class="botao-comprar"
+          [disabled]="!estoque[produto.idItem]"
           (click)="adicionarAoCarrinho(produto)">
           Adicionar ao carrinho
         </button>

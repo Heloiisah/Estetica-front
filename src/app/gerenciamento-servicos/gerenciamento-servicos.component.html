@@ -5,15 +5,15 @@
         <h1>Serviços</h1>
         <p>Gerencie os serviços da loja.</p>
       </div>
-  
+
       <a routerLink="/painel-administrativo" class="botao-voltar">
         Voltar ao painel
       </a>
     </header>
-  
+
     <section class="cartao formulario">
       <h2>{{ idEdicao !== null ? 'Editar serviço' : 'Novo serviço' }}</h2>
-  
+
       <form (ngSubmit)="salvarServico()">
         <label for="nomeServico">Nome do serviço</label>
         <input
@@ -25,7 +25,7 @@
           maxlength="100"
           required
         >
-  
+
         <label for="descricaoServico">Descrição</label>
         <textarea
           id="descricaoServico"
@@ -34,7 +34,7 @@
           placeholder="Descreva o serviço"
           required
         ></textarea>
-  
+
         <label for="idCategoria">ID da categoria</label>
         <input
           id="idCategoria"
@@ -44,7 +44,7 @@
           min="1"
           required
         >
-  
+
         <label for="preco">Preço (R$)</label>
         <input
           id="preco"
@@ -55,7 +55,7 @@
           step="0.01"
           required
         >
-  
+
         <label for="ativoProdutoServico">Situação</label>
         <select
           id="ativoProdutoServico"
@@ -66,12 +66,12 @@
           <option value="S">Ativo</option>
           <option value="N">Inativo</option>
         </select>
-  
+
         <div class="acoes">
           <button type="submit" class="botao-principal">
             {{ idEdicao !== null ? 'Salvar alterações' : 'Cadastrar serviço' }}
           </button>
-  
+
           <button
             *ngIf="idEdicao !== null"
             type="button"
@@ -83,10 +83,10 @@
         </div>
       </form>
     </section>
-  
+
     <section class="cartao consulta">
       <h2>Consultar serviço</h2>
-  
+
       <div class="linha-consulta">
         <input
           type="number"
@@ -95,24 +95,24 @@
           placeholder="Digite o ID"
           min="1"
         >
-  
+
         <button type="button" class="botao-principal" (click)="consultarPorId()">
           Consultar
         </button>
-  
+
         <button type="button" class="botao-secundario" (click)="listarServicos()">
           Listar todos
         </button>
       </div>
     </section>
-  
+
     <p *ngIf="mensagem" class="mensagem sucesso">{{ mensagem }}</p>
     <p *ngIf="erro" class="mensagem erro">{{ erro }}</p>
     <p *ngIf="carregando" class="mensagem">Carregando serviços...</p>
-  
+
     <section class="cartao tabela-cartao">
       <h2>Serviços cadastrados</h2>
-  
+
       <div class="tabela-container">
         <table>
           <thead>
@@ -126,7 +126,7 @@
               <th>Ações</th>
             </tr>
           </thead>
-  
+
           <tbody>
             <tr *ngFor="let servico of servicos">
               <td>{{ servico.idItem }}</td>
@@ -143,17 +143,17 @@
                 >
                   Editar
                 </button>
-  
+
                 <button
                   type="button"
                   class="botao-excluir"
-                  (click)="excluir(servico)"
+                  (click)="desativar(servico)"
                 >
-                  Excluir
+                  Desativar
                 </button>
               </td>
             </tr>
-  
+
             <tr *ngIf="!carregando && servicos.length === 0">
               <td colspan="7" class="vazio">
                 Nenhum serviço encontrado.
@@ -164,4 +164,4 @@
       </div>
     </section>
   </div>
-  
+

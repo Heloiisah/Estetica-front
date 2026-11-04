@@ -268,7 +268,7 @@ export class CarrinhoComponent implements OnInit {
     if (!Number.isInteger(idpessoa) || idpessoa <= 0) {
 
       // Informa que não foi possível identificar o cliente.
-      this.mensagem = 'Não foi possível identificar o cliente.';
+      this.mensagem = 'Cadastre-se ou identifique-se em Meus pedidos antes de comprar.';
 
       // Interrompe a execução porque o pedido precisa estar vinculado a uma pessoa.
       return;
@@ -380,7 +380,9 @@ export class CarrinhoComponent implements OnInit {
         console.error('Erro ao criar pedido:', erro);
 
         // Tenta recuperar a mensagem específica retornada pela API.
-        this.mensagem =
+        this.mensagem = erro.status === 401
+          ? 'Identifique-se em Meus pedidos antes de comprar.'
+          :
 
           // Primeiro verifica se a API retornou a propriedade mensagem.
           erro.error?.mensagem ||

@@ -1,13 +1,13 @@
 
 <div class="container">
     <h2>Gerenciamento de Produtos</h2>
-  
+
     <p class="mensagem" *ngIf="mensagem">{{ mensagem }}</p>
     <p class="erro" *ngIf="erro">{{ erro }}</p>
-  
+
     <form (ngSubmit)="salvarProduto()">
       <h3>{{ idEdicao !== null ? 'Editar Produto' : 'Cadastrar Produto' }}</h3>
-  
+
       <label for="nomeProduto">Nome do produto</label>
       <input
         id="nomeProduto"
@@ -16,7 +16,7 @@
         [(ngModel)]="nomeProduto"
         required
       >
-  
+
       <label for="descricaoProduto">Descrição</label>
       <textarea
         id="descricaoProduto"
@@ -24,7 +24,7 @@
         [(ngModel)]="descricaoProduto"
         required
       ></textarea>
-  
+
       <label for="idCategoria">ID da categoria</label>
       <input
         id="idCategoria"
@@ -34,7 +34,7 @@
         min="1"
         required
       >
-  
+
       <label for="precoItem">Preço do item</label>
       <input
         id="precoItem"
@@ -45,7 +45,7 @@
         step="0.01"
         required
       >
-  
+
       <label for="codigoPreco">Código do preço</label>
       <input
         id="codigoPreco"
@@ -54,7 +54,7 @@
         [(ngModel)]="codigoPreco"
         required
       >
-  
+
       <label for="precoVenda">Preço de venda</label>
       <input
         id="precoVenda"
@@ -65,7 +65,7 @@
         step="0.01"
         required
       >
-  
+
       <label for="unidade">Unidade</label>
       <input
         id="unidade"
@@ -75,7 +75,7 @@
         placeholder="Ex.: unidade, pacote"
         required
       >
-  
+
       <label for="ativoProdutoServico">Situação</label>
       <select
         id="ativoProdutoServico"
@@ -86,16 +86,16 @@
         <option value="S">Ativo</option>
         <option value="N">Inativo</option>
       </select>
-  
+
       <div class="botoes">
         <button type="submit">
           {{ idEdicao !== null ? 'Salvar alterações' : 'Cadastrar produto' }}
         </button>
-  
+
         <button type="button" class="secundario" (click)="limparFormulario()">
           Limpar
         </button>
-  
+
         <button
           *ngIf="idEdicao !== null"
           type="button"
@@ -106,10 +106,10 @@
         </button>
       </div>
     </form>
-  
+
     <div class="consulta">
       <h3>Consultar produto por ID</h3>
-  
+
       <div class="consulta-campos">
         <input
           type="number"
@@ -118,21 +118,21 @@
           placeholder="Digite o ID"
           min="1"
         >
-  
+
         <button type="button" (click)="consultarPorId()">
           Consultar
         </button>
-  
+
         <button type="button" class="secundario" (click)="voltarLista()">
           Listar todos
         </button>
       </div>
     </div>
-  
+
     <h3>Produtos cadastrados</h3>
-  
+
     <p *ngIf="carregando">Carregando produtos...</p>
-  
+
     <div class="tabela-container" *ngIf="!carregando">
       <table>
         <thead>
@@ -147,7 +147,7 @@
             <th>Ações</th>
           </tr>
         </thead>
-  
+
         <tbody>
           <tr *ngFor="let produto of produtos">
             <td>{{ produto.idItem }}</td>
@@ -161,17 +161,17 @@
               <button type="button" (click)="editar(produto)">
                 Editar
               </button>
-  
+
               <button
                 type="button"
                 class="excluir"
-                (click)="excluir(produto.idItem)"
+                (click)="desativar(produto.idItem)"
               >
-                Excluir
+                Desativar
               </button>
             </td>
           </tr>
-  
+
           <tr *ngIf="produtos.length === 0">
             <td colspan="8">Nenhum produto cadastrado.</td>
           </tr>
@@ -179,4 +179,4 @@
       </table>
     </div>
   </div>
-  
+

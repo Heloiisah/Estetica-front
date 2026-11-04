@@ -185,10 +185,10 @@ export class GerenciamentoServicosComponent implements OnInit {
     this.erro = '';
   }
 
-  // Exclui um serviço após a confirmação do usuário.
-  excluir(servico: ItemServico): void {
+  // Desativa um serviço após a confirmação do usuário.
+  desativar(servico: ItemServico): void {
     const confirmar = window.confirm(
-      `Deseja excluir o serviço "${servico.item}"?`
+      `Deseja desativar o serviço "${servico.item}"?`
     );
 
     if (!confirmar) {
@@ -198,18 +198,15 @@ export class GerenciamentoServicosComponent implements OnInit {
     this.erro = '';
     this.mensagem = '';
 
-    this.itemServicoService.excluirServico(servico.idItem).subscribe({
+    this.itemServicoService.desativarServico(servico.idItem).subscribe({
       next: () => {
-        this.mensagem = 'Serviço excluído com sucesso!';
+        this.mensagem = 'Serviço desativado com sucesso!';
         this.listarServicos();
       },
       error: erro => {
-        console.error('Erro ao excluir serviço:', erro);
+        console.error('Erro ao desativar serviço:', erro);
 
-        // Verifica se o serviço está vinculado a algum atendimento (erro 409).
-        this.erro = erro.status === 409
-          ? 'Não é possível excluir este serviço porque ele está vinculado a um atendimento.'
-          : 'Não foi possível excluir o serviço.';
+        this.erro = 'Não foi possível desativar o serviço.';
       }
     });
   }

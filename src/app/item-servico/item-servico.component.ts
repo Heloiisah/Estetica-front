@@ -22,6 +22,7 @@ export class ItemServicoComponent implements OnInit {
 
   // Armazena o nome utilizado na pesquisa.
   pesquisa = '';
+  pesquisaId = '';
 
   // Armazena a categoria selecionada.
   categoriaSelecionada = '';
@@ -106,7 +107,11 @@ export class ItemServicoComponent implements OnInit {
         String(servico.idCategoria ?? servico.idcategoria ?? '') ===
         String(this.categoriaSelecionada);
 
-      return nomeCorresponde && categoriaCorresponde;
+      const idCorresponde =
+        this.pesquisaId === '' ||
+        String(servico.idItem) === this.pesquisaId;
+
+      return nomeCorresponde && categoriaCorresponde && idCorresponde;
     });
   }
 

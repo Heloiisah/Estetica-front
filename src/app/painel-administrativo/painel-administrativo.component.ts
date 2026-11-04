@@ -1,6 +1,7 @@
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-painel-administrativo',
@@ -9,7 +10,20 @@ import { RouterLink } from '@angular/router';
   templateUrl: './painel-administrativo.component.html',
   styleUrl: './painel-administrativo.component.css'
 })
-export class PainelAdministrativoComponent {
+export class PainelAdministrativoComponent implements OnInit {
+  resumo = { clientes: 0, produtos: 0, servicos: 0, pedidos: 0, estoque: 0 };
+  aviso = '';
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    const api = 'http://localhost:5206/api/';
+    this.http.get<any[]>(api + 'PessoaEndereco').subscribe({next: dados => this.resumo.clientes = dados.length, error: () => this.aviso = 'Alguns dados do painel não puderam ser carregados.'});
+    this.http.get<any[]>(api + 'ProdutoItem').subscribe({next: dados => this.resumo.produtos = dados.length, error: () => this.aviso = 'Alguns dados do painel não puderam ser carregados.'});
+    this.http.get<any[]>(api + 'ItemServico').subscribe({next: dados => this.resumo.servicos = dados.length, error: () => this.aviso = 'Alguns dados do painel não puderam ser carregados.'});
+    this.http.get<any[]>(api + 'Pedido').subscribe({next: dados => this.resumo.pedidos = dados.length, error: () => this.aviso = 'Alguns dados do painel não puderam ser carregados.'});
+    this.http.get<any[]>(api + 'Estoque').subscribe({next: dados => this.resumo.estoque = dados.reduce((total, item) => total + Number(item.quantidadeEstoque || 0), 0), error: () => this.aviso = 'Alguns dados do painel não puderam ser carregados.'});
+  }
   opcoes = [
     {
       titulo: 'Início',
@@ -21,6 +35,8 @@ export class PainelAdministrativoComponent {
       descricao: 'Consultar os clientes cadastrados.',
       rota: '/clientes'
     },
+    { titulo: 'Funcionários', descricao: 'Cadastrar e consultar funcionários.', rota: '/funcionarios' },
+    { titulo: 'Atendimentos', descricao: 'Registrar e consultar atendimentos.', rota: '/atendimentos' },
     {
       titulo: 'Categorias',
       descricao: 'Organizar as categorias dos itens.',

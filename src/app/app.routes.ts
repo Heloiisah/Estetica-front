@@ -1,5 +1,8 @@
 
 import { Routes } from '@angular/router';
+import { MeusPedidosComponent } from './meus-pedidos/meus-pedidos.component';
+import { FuncionariosComponent } from './funcionarios/funcionarios.component';
+import { AtendimentosComponent } from './atendimentos/atendimentos.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { ProdutosComponent } from './produtos/produtos.component';
 import { ItemServicoComponent } from './item-servico/item-servico.component';
@@ -29,5 +32,8 @@ export const routes: Routes = [
   { path: 'clientes', component: ClientesComponent },
   { path: 'categorias', component: CategoriasComponent },
   { path: 'pedidos', component: PedidosComponent },
+  { path: 'meus-pedidos', component: MeusPedidosComponent },
+  { path: 'funcionarios', component: FuncionariosComponent },
+  { path: 'atendimentos', component: AtendimentosComponent },
   { path: '**', redirectTo: 'inicio' }
 ];

@@ -46,7 +46,7 @@ export class ItemServicoService {
   }
 
   // Exclui um serviço utilizando seu ID.
-  excluirServico(id: number): Observable<void> {
+  desativarServico(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

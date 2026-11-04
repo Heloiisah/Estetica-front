@@ -18,6 +18,22 @@ export class ClientesComponent implements OnInit {
 
   // Cria uma lista vazia para armazenar os clientes cadastrados.
   clientes: any[] = [];
+  clienteEdicao: any = null;
+
+  editar(cliente: any): void {
+    this.clienteEdicao = { ...cliente };
+  }
+
+  salvarEdicao(): void {
+    if (!this.clienteEdicao?.nome || !this.clienteEdicao?.email) {
+      this.mensagem = 'Informe nome e e-mail.';
+      return;
+    }
+    this.pessoaEnderecoService.editarPessoa(this.clienteEdicao.idPessoa, this.clienteEdicao).subscribe({
+      next: () => { this.clienteEdicao = null; this.listarClientes(); this.mensagem = 'Cliente atualizado.'; },
+      error: () => this.mensagem = 'Não foi possível atualizar o cliente.'
+    });
+  }
 
   // Armazena o ID informado pelo usuário para pesquisar um cliente.
   idBusca = '';

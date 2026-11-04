@@ -1,0 +1,24 @@
+<main class="pagina">
+  <a routerLink="/inicio">Voltar à loja</a>
+  <h1>Meus pedidos</h1>
+
+  <form *ngIf="identificacaoNecessaria" (ngSubmit)="identificar()">
+    <p>Informe os dados usados no cadastro.</p>
+    <label>CPF <input name="cpf" [(ngModel)]="cpf" required></label>
+    <label>E-mail <input name="email" type="email" [(ngModel)]="email" required></label>
+    <button>Consultar meus pedidos</button>
+  </form>
+
+  <p *ngIf="mensagem">{{ mensagem }}</p>
+
+  <article *ngFor="let pedido of pedidos">
+    <h2>Pedido #{{ pedido.idPedido }}</h2>
+    <p>{{ pedido.dataPedido | date:'dd/MM/yyyy' }} · {{ pedido.status }} · {{ pedido.total | currency:'BRL' }}</p>
+    <details>
+      <summary>Ver itens</summary>
+      <p *ngFor="let item of pedido.itens">
+        {{ item.item }} · {{ item.quantidade }} × {{ item.valorUnitario | currency:'BRL' }}
+      </p>
+    </details>
+  </article>
+</main>

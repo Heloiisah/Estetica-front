@@ -49,7 +49,7 @@ export class ProdutoService {
   }
 
   // Exclui um produto utilizando seu ID.
-  excluirProduto(id: number): Observable<void> {
+  desativarProduto(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

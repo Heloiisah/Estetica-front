@@ -6,6 +6,12 @@
   
     <section class="conteudo">
       <h2>Painel administrativo</h2>
+      @if (aviso) { <p>{{ aviso }}</p> }
+      <div class="resumo-painel">
+        <p>Clientes <strong>{{ resumo.clientes }}</strong></p><p>Produtos <strong>{{ resumo.produtos }}</strong></p>
+        <p>Serviços <strong>{{ resumo.servicos }}</strong></p><p>Pedidos <strong>{{ resumo.pedidos }}</strong></p>
+        <p>Itens em estoque <strong>{{ resumo.estoque }}</strong></p>
+      </div>
       <p class="subtitulo">Selecione uma opção para gerenciar sua loja.</p>
   
       <div class="lista-opcoes">

@@ -111,6 +111,13 @@ export class CadastroComponent {
       return;
     }
 
+    if (!/^\d{11}$/.test(this.cliente.cpf.replace(/\D/g, '')) ||
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.cliente.email.trim()) ||
+        !/^\d{8}$/.test(this.cliente.cep.replace(/\D/g, ''))) {
+      this.mensagemCliente = 'Confira CPF, e-mail e CEP informados.';
+      return;
+    }
+
     // Remove os caracteres especiais do CPF e converte o resultado para número.
     const cpf = Number(this.cliente.cpf.replace(/\D/g, ''));
 

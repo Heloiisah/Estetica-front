@@ -7,6 +7,13 @@ import { Observable } from 'rxjs';
 export interface Estoque {
   idItem: number;
   quantidadeEstoque: number;
+  item?: string;
+  descricaoItem?: string;
+  preco?: number;
+  precoVenda?: number;
+  unidade?: string;
+  categoria?: string;
+  ativoProdutoServico?: string;
 }
 
 @Injectable({
@@ -23,5 +30,9 @@ export class EstoqueService {
   // Busca todos os registros de estoque cadastrados.
   listarEstoques(): Observable<Estoque[]> {
     return this.http.get<Estoque[]>(this.apiUrl);
+  }
+
+  consultarEstoque(id: number): Observable<Estoque> {
+    return this.http.get<Estoque>(`${this.apiUrl}/${id}`);
   }
 }

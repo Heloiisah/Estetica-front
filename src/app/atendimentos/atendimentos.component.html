@@ -1,0 +1,28 @@
+<main class="pagina">
+  <a routerLink="/painel-administrativo">Voltar ao painel</a>
+  <h1>Atendimentos</h1>
+
+  <form (ngSubmit)="salvar()">
+    <h2>Registrar atendimento</h2>
+    <label>Cliente (ID) <input type="number" name="cliente" [(ngModel)]="cliente" min="1" required></label>
+    <label>Data <input type="date" name="data" [(ngModel)]="data" required></label>
+    <label>Item (ID) <input type="number" name="item" [(ngModel)]="item" min="1" required></label>
+    <label>Funcionário (ID) <input type="number" name="funcionario" [(ngModel)]="funcionario" min="1" required></label>
+    <label>Quantidade <input type="number" name="quantidade" [(ngModel)]="quantidade" min="1" required></label>
+    <label>Valor unitário <input type="number" name="valor" [(ngModel)]="valor" min="0.01" step="0.01" required></label>
+    <button>Registrar atendimento</button>
+  </form>
+
+  <p>{{ mensagem }}</p>
+  <label>Consultar por ID <input type="number" [(ngModel)]="busca"></label>
+  <button type="button" (click)="consultar()">Consultar</button>
+  <button type="button" (click)="listar()">Listar todos</button>
+
+  <article *ngFor="let atendimento of atendimentos">
+    <h2>#{{ atendimento.idAtendimento }} · {{ atendimento.nomePessoa }}</h2>
+    <p>{{ atendimento.dataAtendimento }} · {{ atendimento.statusAtendimento }}</p>
+    <p *ngFor="let item of atendimento.itens">
+      {{ item.item }} · {{ item.quantidadeItens }} · {{ item.nomeFuncionario }} ({{ item.cargo }})
+    </p>
+  </article>
+</main>

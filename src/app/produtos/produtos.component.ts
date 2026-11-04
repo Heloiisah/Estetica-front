@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ProdutoService } from '../services/produto.service';
 import { Categoria, CategoriaService } from '../services/categoria.service';
+import { EstoqueService } from '../services/estoque.service';
 
 @Component({
   // Define o nome do componente utilizado no HTML.
@@ -30,22 +31,32 @@ export class ProdutosComponent implements OnInit {
 
   // Armazena o nome utilizado na pesquisa de produtos.
   pesquisa = '';
+  pesquisaId = '';
 
   // Armazena a categoria selecionada no filtro.
   categoriaSelecionada = '';
 
   // Armazena as categorias disponíveis para pesquisa.
   categorias: Categoria[] = [];
+  estoque: Record<number, number> = {};
 
   // Inicializa os serviços de produtos e categorias e o recurso de navegação.
   constructor(
     private produtoService: ProdutoService,
     private categoriaService: CategoriaService,
+    private estoqueService: EstoqueService,
     private router: Router
   ) {}
 
   // Executa quando a página é inicializada e busca os produtos na API.
   ngOnInit(): void {
+
+    this.estoqueService.listarEstoques().subscribe({
+      next: dados => {
+        this.estoque = Object.fromEntries(dados.map(item => [item.idItem, item.quantidadeEstoque]));
+      },
+      error: () => this.mensagemErro = 'Não foi possível consultar a disponibilidade dos produtos.'
+    });
 
     // Chama o serviço para listar os produtos cadastrados.
     this.produtoService.listarProdutos().subscribe({
@@ -111,8 +122,12 @@ export class ProdutosComponent implements OnInit {
         this.categoriaSelecionada === '' ||
         String(produto.idCategoria ?? produto.idcategoria) === this.categoriaSelecionada;
 
+      const idCorresponde =
+        this.pesquisaId === '' ||
+        String(produto.idItem) === this.pesquisaId;
+
       // Retorna somente os produtos que atendem aos dois filtros.
-      return nomeCorresponde && categoriaCorresponde;
+      return nomeCorresponde && categoriaCorresponde && idCorresponde;
     });
   }
 
@@ -127,6 +142,10 @@ export class ProdutosComponent implements OnInit {
 
   // Adiciona o produto selecionado ao carrinho.
   adicionarAoCarrinho(produto: any): void {
+    if ((this.estoque[produto.idItem] ?? 0) < 1) {
+      this.mensagemErro = 'Produto sem estoque disponível.';
+      return;
+    }
     try {
 
       // Recupera os itens que já estão armazenados no navegador.

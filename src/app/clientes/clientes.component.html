@@ -6,6 +6,14 @@
     </header>
   
     <section class="conteudo">
+      <form *ngIf="clienteEdicao" (ngSubmit)="salvarEdicao()">
+        <h2>Editar cliente #{{ clienteEdicao.idPessoa }}</h2>
+        <label>Nome <input name="nome" [(ngModel)]="clienteEdicao.nome" required></label>
+        <label>E-mail <input type="email" name="email" [(ngModel)]="clienteEdicao.email" required></label>
+        <label>Telefone <input name="telefone" [(ngModel)]="clienteEdicao.telefone" required></label>
+        <button type="submit">Salvar alterações</button>
+        <button type="button" (click)="clienteEdicao = null">Cancelar</button>
+      </form>
       <div class="busca">
         <input
           type="number"
@@ -35,6 +43,7 @@
               <th>E-mail</th>
               <th>Telefone</th>
               <th>Situação</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -46,11 +55,12 @@
                 <td>{{ cliente.email }}</td>
                 <td>{{ cliente.telefone }}</td>
                 <td>{{ cliente.ativoPessoa === 'S' ? 'Ativo' : 'Inativo' }}</td>
+                <td><button type="button" (click)="editar(cliente)">Editar</button></td>
               </tr>
             } @empty {
               @if (!carregando && !mensagem) {
                 <tr>
-                  <td colspan="6">Nenhum cliente encontrado.</td>
+                  <td colspan="7">Nenhum cliente encontrado.</td>
                 </tr>
               }
             }
