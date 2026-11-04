@@ -24,7 +24,7 @@ export interface Produto {
 export class ProdutoService {
 
   // Endereço da API responsável pelos produtos.
-  private apiUrl = 'https://localhost:7299/api/ProdutoItem';
+  private apiUrl = 'http://localhost:5206/api/ProdutoItem';
 
   constructor(private http: HttpClient) {}
 

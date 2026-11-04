@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class PedidoService {
 
   // Endereço da API responsável pelos pedidos.
-  private apiUrl = 'https://localhost:7299/api/Pedido';
+  private apiUrl = 'http://localhost:5206/api/Pedido';
 
   constructor(private http: HttpClient) {}
 

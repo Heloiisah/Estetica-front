@@ -16,7 +16,7 @@ export interface Estoque {
 export class EstoqueService {
 
   // Endereço da API responsável pelo estoque.
-  private apiUrl = 'https://localhost:7299/api/Estoque';
+  private apiUrl = 'http://localhost:5206/api/Estoque';
 
   constructor(private http: HttpClient) {}
 

@@ -2,8 +2,8 @@
 :host {
     display: block;
     font-family: 'Segoe UI', Arial, sans-serif;
-    color: #4b2635;
-    background: #fff7fa;
+    color: #322739;
+    background: #faf8fd;
   }
   
   * {
@@ -20,8 +20,8 @@
     align-items: center;
     gap: 25px;
     padding: 16px 7%;
-    background: #754456;
-    border-bottom: 4px solid #e8c4d1;
+    background: #59337c;
+    border-bottom: 4px solid #cbb2df;
   }
   
   .logo h1 {
@@ -36,7 +36,7 @@
     margin: 4px 0 0;
     font-size: 11px;
     letter-spacing: 1.5px;
-    color: #f3dce5;
+    color: #eee7f7;
   }
   
   nav {
@@ -53,7 +53,7 @@
   }
   
   nav a:hover {
-    color: #f2c7d7;
+    color: #dfc9ef;
   }
   
   .destaque {
@@ -61,7 +61,7 @@
     padding: 60px 10%;
     display: flex;
     align-items: center;
-    background: #f3e3e9;
+    background: #eee7f7;
   }
   
   .destaque > div {
@@ -70,7 +70,7 @@
   
   .subtitulo {
     margin-bottom: 15px;
-    color: #a66f83;
+    color: #71439a;
     font-size: 11px;
     font-weight: bold;
     letter-spacing: 2px;
@@ -78,7 +78,7 @@
   
   .destaque h2 {
     margin: 0 0 18px;
-    color: #624653;
+    color: #493455;
     font-family: Georgia, serif;
     font-size: 43px;
     font-weight: normal;
@@ -98,7 +98,7 @@
     padding: 11px 18px;
     border: none;
     border-radius: 4px;
-    background: #a66f83;
+    background: #71439a;
     color: #ffffff;
     text-align: center;
     text-decoration: none;
@@ -109,7 +109,7 @@
   }
   
   .botao:hover {
-    background: #754456;
+    background: #59337c;
   }
   
   .catalogo {
@@ -121,7 +121,7 @@
   
   .catalogo h2 {
     margin: 0 0 12px;
-    color: #624653;
+    color: #493455;
     font-family: Georgia, serif;
     font-size: 32px;
     font-weight: normal;
@@ -129,7 +129,7 @@
   
   .catalogo > p {
     margin-bottom: 28px;
-    color: #876779;
+    color: #665370;
     font-size: 14px;
     line-height: 1.7;
   }
@@ -147,7 +147,7 @@
     min-width: 0;
     width: 100%;
     padding: 12px 14px;
-    border: 1px solid #dfc5cf;
+    border: 1px solid #d1bfe1;
     border-radius: 4px;
     outline: none;
     background: #ffffff;
@@ -157,14 +157,14 @@
   
   .pesquisa input:focus,
   .pesquisa select:focus {
-    border-color: #a66f83;
+    border-color: #71439a;
   }
   
   .pesquisa button {
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
-    background: #754456;
+    background: #59337c;
     color: #ffffff;
     cursor: pointer;
     font-size: 13px;
@@ -172,7 +172,7 @@
   }
   
   .pesquisa button:hover {
-    background: #a66f83;
+    background: #71439a;
   }
   
   .produtos {
@@ -188,15 +188,15 @@
     flex-direction: column;
     overflow: hidden;
     padding: 14px;
-    border: 1px solid #ead7df;
+    border: 1px solid #dfd2ea;
     border-radius: 5px;
-    background: #fffafd;
+    background: #ffffff;
     transition: box-shadow 0.3s, transform 0.3s;
   }
   
   .produto:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 18px #75445618;
+    box-shadow: 0 6px 18px #59337c18;
   }
   
   .imagem-produto {
@@ -206,8 +206,8 @@
     min-height: 175px;
     padding: 20px;
     border-radius: 4px;
-    background: #f3e3e9;
-    color: #754456;
+    background: #eee7f7;
+    color: #59337c;
     font-family: Georgia, serif;
     font-size: 17px;
     text-align: center;
@@ -215,7 +215,7 @@
   
   .produto h3 {
     margin: 14px 0 8px;
-    color: #624653;
+    color: #493455;
     font-family: Georgia, serif;
     font-size: 19px;
     font-weight: normal;
@@ -223,7 +223,7 @@
   
   .produto p {
     margin: 0 0 10px;
-    color: #876779;
+    color: #665370;
     font-size: 13px;
     line-height: 1.6;
   }
@@ -231,7 +231,7 @@
   .produto .preco {
     margin-top: auto;
     padding-top: 8px;
-    color: #754456;
+    color: #59337c;
     font-size: 16px;
     font-weight: bold;
   }
@@ -243,12 +243,12 @@
   
   .total-carrinho {
     margin-top: 25px;
-    color: #754456;
+    color: #59337c;
     font-size: 20px;
   }
   
   #carrinho {
-    background: #f9eff3;
+    background: #f4edf9;
   }
   
   #carrinho .produtos {
@@ -259,7 +259,7 @@
   }
   
   #clientes {
-    background: #fff7fa;
+    background: #faf8fd;
   }
   
   .formulario-cliente {
@@ -267,9 +267,9 @@
     max-width: 600px;
     margin: 30px auto 0;
     padding: 30px;
-    border: 1px solid #ead0da;
+    border: 1px solid #e1d0ed;
     border-radius: 8px;
-    background: #f5e9ee;
+    background: #eee7f7;
     box-shadow: 0 4px 16px rgba(117, 68, 86, 0.08);
     text-align: left;
   }
@@ -282,7 +282,7 @@
   }
   
   .campo-cliente label {
-    color: #624653;
+    color: #493455;
     font-size: 13px;
     font-weight: 600;
   }
@@ -293,19 +293,19 @@
     width: 100%;
     min-height: 40px;
     padding: 10px 12px;
-    border: 1px solid #dfc5cf;
+    border: 1px solid #d1bfe1;
     border-radius: 4px;
     outline: none;
     background: #ffffff;
-    color: #4b2635;
+    color: #322739;
     font-family: inherit;
     font-size: 14px;
   }
   
   .campo-cliente input:focus,
   .campo-cliente select:focus {
-    border-color: #a66f83;
-    box-shadow: 0 0 0 2px #a66f831c;
+    border-color: #71439a;
+    box-shadow: 0 0 0 2px #71439a1c;
   }
   
   .acoes-cliente {
@@ -325,23 +325,23 @@
   }
   
   .acoes-cliente button[type="button"]:hover {
-    background: #a66f83;
+    background: #71439a;
   }
   
   .formulario-cliente > p {
     margin: 18px 0 0;
-    color: #754456;
+    color: #59337c;
     font-size: 14px;
     text-align: center;
   }
   
   #servicos {
-    background: #f3e3e9;
+    background: #eee7f7;
   }
   
   footer {
     padding: 25px 7%;
-    background: #754456;
+    background: #59337c;
     color: #ffffff;
     text-align: center;
   }

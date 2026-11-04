@@ -1,7 +1,7 @@
 .pagina-pedidos {
   padding: 30px;
   color: #4d3540;
-  background: #fff7fa;
+  background: #faf8fd;
   min-height: 100%;
 }
 
@@ -15,7 +15,7 @@
 
 .cabecalho h2 {
   margin: 0 0 8px;
-  color: #b56b88;
+  color: #7950a3;
   font-size: 28px;
 }
 
@@ -34,7 +34,7 @@ button {
   border: none;
   border-radius: 8px;
   padding: 11px 18px;
-  background: #b56b88;
+  background: #7950a3;
   color: white;
   cursor: pointer;
   font-size: 14px;
@@ -47,12 +47,12 @@ button:hover {
 
 .botao-voltar {
   background: white;
-  color: #b56b88;
-  border: 1px solid #b56b88;
+  color: #7950a3;
+  border: 1px solid #7950a3;
 }
 
 .botao-voltar:hover {
-  background: #f5e3eb;
+  background: #ede3f7;
 }
 
 .tabela-container {
@@ -74,30 +74,30 @@ table {
 
 thead th {
   padding: 17px 16px;
-  background: #f5e3eb;
+  background: #ede3f7;
   color: #75465a;
   font-size: 14px;
   font-weight: 700;
   text-align: left;
   white-space: nowrap;
-  border-bottom: 2px solid #ebcbd8;
+  border-bottom: 2px solid #e0cdec;
 }
 
 tbody td {
   padding: 18px 16px;
   color: #59434d;
   font-size: 14px;
-  border-bottom: 1px solid #f0dce4;
+  border-bottom: 1px solid #e9ddf4;
   white-space: nowrap;
   vertical-align: middle;
 }
 
 tbody tr:nth-child(even) {
-  background: #fff9fb;
+  background: #fcfaff;
 }
 
 tbody tr:hover {
-  background: #fdf0f5;
+  background: #f7f0fc;
   transition: background 0.2s ease;
 }
 
@@ -118,7 +118,7 @@ select {
 }
 
 select:focus {
-  border-color: #b56b88;
+  border-color: #7950a3;
   box-shadow: 0 0 0 3px rgba(181, 107, 136, 0.12);
 }
 

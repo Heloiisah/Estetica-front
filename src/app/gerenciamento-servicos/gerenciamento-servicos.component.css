@@ -2,8 +2,8 @@
 .pagina-categorias {
     min-height: 100vh;
     padding: 32px;
-    background: #fff7fa;
-    color: #49323d;
+    background: #faf8fd;
+    color: #45314d;
     font-family: Arial, sans-serif;
   }
   
@@ -17,7 +17,7 @@
   
   .cabecalho h1 {
     margin: 0 0 8px;
-    color: #b56b88;
+    color: #7950a3;
     font-size: 30px;
   }
   
@@ -31,7 +31,7 @@
     display: inline-block;
     padding: 11px 18px;
     border-radius: 7px;
-    background: #78485c;
+    background: #65457c;
     color: #fff;
     text-decoration: none;
     font-weight: 600;
@@ -53,7 +53,7 @@
   
   .cartao h2 {
     margin: 0 0 24px;
-    color: #b56b88;
+    color: #7950a3;
     font-size: 23px;
   }
   
@@ -65,7 +65,7 @@
   
   .formulario label {
     margin-top: 4px;
-    color: #49323d;
+    color: #45314d;
     font-size: 16px;
     font-weight: 600;
   }
@@ -80,7 +80,7 @@
     border: 1px solid #e7bfd0;
     border-radius: 8px;
     background: #fff;
-    color: #49323d;
+    color: #45314d;
     font: inherit;
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
@@ -95,7 +95,7 @@
   .formulario textarea:focus,
   .formulario select:focus,
   .linha-consulta input:focus {
-    border-color: #b56b88;
+    border-color: #7950a3;
     box-shadow: 0 0 0 3px rgba(181, 107, 136, 0.12);
   }
   
@@ -117,7 +117,7 @@
   }
   
   .botao-principal {
-    background: #b56b88;
+    background: #7950a3;
     color: #fff;
   }
   
@@ -183,12 +183,12 @@
   th,
   td {
     padding: 14px 12px;
-    border-bottom: 1px solid #f0dfe6;
+    border-bottom: 1px solid #e8dcf2;
     vertical-align: middle;
   }
   
   th {
-    color: #78485c;
+    color: #65457c;
     font-size: 14px;
   }
   
@@ -198,7 +198,7 @@
   }
   
   tbody tr:hover {
-    background: #fff9fb;
+    background: #fcfaff;
   }
   
   .acoes-tabela {
@@ -209,7 +209,7 @@
   
   .botao-editar {
     background: #f0d9e3;
-    color: #78485c;
+    color: #65457c;
   }
   
   .botao-editar:hover {

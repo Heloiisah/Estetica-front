@@ -1,14 +1,14 @@
 .painel {
     min-height: 100vh;
-    background: #fff7fa;
-    color: #59434c;
+    background: #faf8fd;
+    color: #56415f;
   }
   
   .cabecalho {
     min-height: 85px;
     padding: 20px 7%;
     background: #ffffff;
-    border-bottom: 1px solid #f0dce4;
+    border-bottom: 1px solid #e9ddf4;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -16,7 +16,7 @@
   }
   
   .marca {
-    color: #b56b88;
+    color: #7950a3;
     font-size: 22px;
     font-weight: 700;
     text-decoration: none;
@@ -29,7 +29,7 @@
   
   .cabecalho h1 {
     margin: 0;
-    color: #b56b88;
+    color: #7950a3;
     font-size: 18px;
     letter-spacing: 1.5px;
   }
@@ -41,13 +41,13 @@
   
   .conteudo h2 {
     margin-bottom: 8px;
-    color: #b56b88;
+    color: #7950a3;
     font-size: 28px;
   }
   
   .subtitulo {
     margin-bottom: 28px;
-    color: #806b74;
+    color: #74637d;
   }
   
   .lista-opcoes {
@@ -64,7 +64,7 @@
     justify-content: space-between;
     gap: 15px;
     background: #ffffff;
-    border: 1px solid #f0dce4;
+    border: 1px solid #e9ddf4;
     border-radius: 10px;
     text-decoration: none;
     color: inherit;
@@ -72,26 +72,26 @@
   }
   
   .cartao:hover {
-    border-color: #b56b88;
+    border-color: #7950a3;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px #b56b8818;
+    box-shadow: 0 5px 15px #7950a318;
   }
   
   .cartao h3 {
     margin: 0 0 8px;
-    color: #b56b88;
+    color: #7950a3;
     font-size: 17px;
   }
   
   .cartao p {
     margin: 0;
-    color: #806b74;
+    color: #74637d;
     font-size: 14px;
     line-height: 1.5;
   }
   
   .seta {
-    color: #b56b88;
+    color: #7950a3;
     font-size: 30px;
   }
   

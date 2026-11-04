@@ -2,7 +2,7 @@
 .pagina-categorias {
     min-height: 100vh;
     padding: 32px;
-    background: #fff7fa;
+    background: #faf8fd;
     color: #49343d;
   }
   
@@ -16,27 +16,27 @@
   
   .cabecalho h1 {
     margin: 0 0 8px;
-    color: #b56b88;
+    color: #7950a3;
     font-size: 30px;
   }
   
   .cabecalho p {
     margin: 0;
-    color: #806b74;
+    color: #74637d;
   }
   
   .cartao {
     margin-bottom: 22px;
     padding: 24px;
     background: #fff;
-    border: 1px solid #f0dce4;
+    border: 1px solid #e9ddf4;
     border-radius: 12px;
     box-shadow: 0 3px 12px #8b526010;
   }
   
   .cartao h2 {
     margin: 0 0 20px;
-    color: #b56b88;
+    color: #7950a3;
     font-size: 20px;
   }
   
@@ -61,8 +61,8 @@
   }
   
   input:focus {
-    border-color: #b56b88;
-    box-shadow: 0 0 0 2px #b56b8820;
+    border-color: #7950a3;
+    box-shadow: 0 0 0 2px #7950a320;
   }
   
   .acoes,
@@ -91,7 +91,7 @@
   
   .botao-principal,
   .botao-voltar {
-    background: #b56b88;
+    background: #7950a3;
     color: white;
   }
   
@@ -101,7 +101,7 @@
   }
   
   .botao-secundario {
-    background: #f5e5ec;
+    background: #eee4f7;
     color: #854760;
   }
   
@@ -126,7 +126,7 @@
   }
   
   th {
-    background: #fff0f5;
+    background: #f6effc;
     color: #8f5069;
   }
   
@@ -137,7 +137,7 @@
   }
   
   .botao-editar {
-    background: #f5e5ec;
+    background: #eee4f7;
     color: #854760;
   }
   
@@ -164,7 +164,7 @@
   
   .vazio {
     padding: 24px;
-    color: #806b74;
+    color: #74637d;
     text-align: center;
   }
   

@@ -21,7 +21,7 @@ export interface ItemServico {
 export class ItemServicoService {
 
   // Endereço da API responsável pelos serviços.
-  private apiUrl = 'https://localhost:7299/api/ItemServico';
+  private apiUrl = 'http://localhost:5206/api/ItemServico';
 
   constructor(private http: HttpClient) {}
 

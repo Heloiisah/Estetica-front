@@ -1,10 +1,9 @@
 <header class="cabecalho">
-  <div class="logo">
-    <h1>Minha Loja</h1>
-    <p>Estética & Bem-Estar</p>
-  </div>
-
-  <nav>
+  <a class="logo" routerLink="/inicio" aria-label="Minha Loja, início">
+    <span class="logo-marca">M</span>
+    <span><strong>Minha Loja</strong><small>Estética &amp; Bem-Estar</small></span>
+  </a>
+  <nav aria-label="Navegação principal">
     <a routerLink="/inicio">Início</a>
     <a routerLink="/produtos">Produtos</a>
     <a routerLink="/item-servico">Serviços</a>
@@ -15,16 +14,27 @@
 </header>
 
 <main>
-  <section class="destaque" id="inicio">
-    <div>
-      <p class="subtitulo">CUIDE DE VOCÊ</p>
-      <h2>Beleza, cuidado e bem-estar em um só lugar.</h2>
-      <p>Encontre produtos e serviços preparados para valorizar o seu bem-estar.</p>
-      <a routerLink="/produtos" class="botao">Conheça nossa loja</a>
+  <section class="destaque">
+    <div class="destaque-texto">
+      <p class="introducao">Estética &amp; Bem-Estar</p>
+      <h1>Seu momento de cuidado começa aqui.</h1>
+      <p>Produtos e serviços para trazer mais beleza e bem-estar à sua rotina.</p>
+      <div class="acoes">
+        <a routerLink="/produtos" class="botao">Explorar produtos</a>
+        <a routerLink="/item-servico" class="link-servicos">Conhecer serviços</a>
+      </div>
+    </div>
+    <div class="composicao" aria-hidden="true">
+      <div class="forma forma-externa"></div>
+      <div class="forma forma-interna"></div>
+      <div class="frasco"><span>Minha Loja</span><small>bem-estar</small></div>
+      <span class="composicao-legenda">Um cuidado por vez.</span>
     </div>
   </section>
+  <section class="caminhos" aria-label="Explore a loja">
+    <a routerLink="/produtos"><span>Para sua rotina</span><strong>Produtos</strong><span>Conheça a seleção ›</span></a>
+    <a routerLink="/item-servico"><span>Para seu tempo</span><strong>Serviços</strong><span>Veja as opções ›</span></a>
+    <a routerLink="/cadastro"><span>Para começar</span><strong>Seu cadastro</strong><span>Cadastre-se ›</span></a>
+  </section>
 </main>
-
-<footer>
-  <p>Minha Loja | Estética & Bem-Estar</p>
-</footer>
+<footer><p>Minha Loja <span>Estética &amp; Bem-Estar</span></p></footer>

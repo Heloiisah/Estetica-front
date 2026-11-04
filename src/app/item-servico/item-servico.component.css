@@ -2,8 +2,8 @@
   display: block;
   min-height: 100vh;
   font-family: 'Segoe UI', Arial, sans-serif;
-  color: #4b2635;
-  background: #fff7fa;
+  color: #322739;
+  background: #faf8fd;
 }
 
 * {
@@ -16,8 +16,8 @@
   align-items: center;
   gap: 25px;
   padding: 16px 7%;
-  background: #754456;
-  border-bottom: 4px solid #e8c4d1;
+  background: #59337c;
+  border-bottom: 4px solid #cbb2df;
 }
 
 .logo h1 {
@@ -32,7 +32,7 @@
   margin: 4px 0 0;
   font-size: 11px;
   letter-spacing: 1.5px;
-  color: #f3dce5;
+  color: #eee7f7;
 }
 
 nav {
@@ -49,19 +49,19 @@ nav a {
 }
 
 nav a:hover {
-  color: #f2c7d7;
+  color: #dfc9ef;
 }
 
 .catalogo {
   min-height: 65vh;
   padding: 45px 7%;
-  background: #f3e3e9;
+  background: #eee7f7;
   text-align: center;
 }
 
 .catalogo h2 {
   margin: 0 0 12px;
-  color: #624653;
+  color: #493455;
   font-family: Georgia, serif;
   font-size: 32px;
   font-weight: normal;
@@ -69,7 +69,7 @@ nav a:hover {
 
 .catalogo > p {
   margin-bottom: 28px;
-  color: #876779;
+  color: #665370;
   font-size: 14px;
   line-height: 1.7;
 }
@@ -87,20 +87,20 @@ nav a:hover {
   flex-direction: column;
   overflow: hidden;
   padding: 20px;
-  border: 1px solid #ead7df;
+  border: 1px solid #dfd2ea;
   border-radius: 5px;
-  background: #fffafd;
+  background: #ffffff;
   transition: box-shadow 0.3s, transform 0.3s;
 }
 
 .produto:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 18px #75445618;
+  box-shadow: 0 6px 18px #59337c18;
 }
 
 .produto h3 {
   margin: 8px 0 12px;
-  color: #624653;
+  color: #493455;
   font-family: Georgia, serif;
   font-size: 19px;
   font-weight: normal;
@@ -108,7 +108,7 @@ nav a:hover {
 
 .produto p {
   margin: 0 0 10px;
-  color: #876779;
+  color: #665370;
   font-size: 13px;
   line-height: 1.6;
 }
@@ -116,7 +116,7 @@ nav a:hover {
 .produto .preco {
   margin-top: auto;
   padding-top: 12px;
-  color: #754456;
+  color: #59337c;
   font-size: 18px;
   font-weight: bold;
 }
@@ -127,7 +127,7 @@ nav a:hover {
 
 footer {
   padding: 25px 7%;
-  background: #754456;
+  background: #59337c;
   color: #ffffff;
   text-align: center;
 }
@@ -184,7 +184,7 @@ footer p {
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
-    background: #754456;
+    background: #59337c;
     color: #ffffff;
     font-size: 14px;
     cursor: pointer;
@@ -192,6 +192,6 @@ footer p {
   }
   
   .botao-agendar:hover {
-    background: #a66f83;
+    background: #71439a;
   }
   
